@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------
+   Global Styles
+-------------------------------- */
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+  background-color: #f9fafb;
+}
+
+/* --------------------------------
+   Buttons
+-------------------------------- */
+
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition;
+}
+
+/* --------------------------------
+   Cards
+-------------------------------- */
+
+.card {
+  @apply bg-white shadow-md rounded-xl p-6;
+}
+
+/* --------------------------------
+   Inputs
+-------------------------------- */
+
+.input-field {
+  @apply border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* --------------------------------
+   Textarea
+-------------------------------- */
+
+.textarea-field {
+  @apply border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500;
+}
+
+/* --------------------------------
+   Layout Helpers
+-------------------------------- */
+
+.container-center {
+  @apply flex items-center justify-center min-h-screen;
+}
