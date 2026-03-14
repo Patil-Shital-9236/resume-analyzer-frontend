@@ -14,7 +14,7 @@ export default function ForgotPasswordPage() {
     if (!/\S+@\S+\.\S+/.test(email)) { setError("Please enter a valid email"); return; }
     setLoading(true); setError("");
     try {
-      const res = await fetch("${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot-password", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -29,7 +29,6 @@ export default function ForgotPasswordPage() {
     <div style={{ minHeight: "100vh", background: "#f8fafc", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
       <div style={{ width: "100%", maxWidth: "420px" }}>
 
-        {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
           <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -75,7 +74,6 @@ export default function ForgotPasswordPage() {
               </button>
             </>
           ) : (
-            /* Success state */
             <div style={{ textAlign: "center", padding: "8px 0" }}>
               <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "#ecfdf5", border: "2px solid #a7f3d0", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -93,7 +91,6 @@ export default function ForgotPasswordPage() {
             </div>
           )}
 
-          {/* Back to login */}
           <div style={{ textAlign: "center", marginTop: "20px", paddingTop: "18px", borderTop: "1px solid #f3f4f6" }}>
             <span style={{ fontSize: "13.5px", color: "#6b7280" }}>Remember your password? </span>
             <span onClick={() => router.push("/login")} style={{ fontSize: "13.5px", color: "#1d4ed8", fontWeight: "600", cursor: "pointer" }}>
