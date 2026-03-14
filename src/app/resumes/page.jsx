@@ -12,7 +12,7 @@ export default function MyResumesPage() {
   const fetchResumes = () => {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
-    fetch(`http://localhost:5000/api/user/resumes/${userId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/resumes/${userId}`)
       .then(r => r.json())
       .then(data => { setResumes(data.resumes || []); setLoading(false); })
       .catch(() => setLoading(false));
@@ -22,7 +22,7 @@ export default function MyResumesPage() {
 
   const setLatest = async (resumeId) => {
     const userId = localStorage.getItem("userId");
-    await fetch(`http://localhost:5000/api/user/resumes/${resumeId}/set-latest`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/resumes/${resumeId}/set-latest`, {
       method: "PUT", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId })
     });
@@ -33,7 +33,7 @@ export default function MyResumesPage() {
 
   const deleteResume = async (resumeId) => {
     if (!confirm("Delete this resume?")) return;
-    await fetch(`http://localhost:5000/api/user/resumes/${resumeId}`, { method: "DELETE" });
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/resumes/${resumeId}`, { method: "DELETE" });
     setMsg("🗑️ Resume deleted");
     fetchResumes();
     setTimeout(() => setMsg(""), 3000);
