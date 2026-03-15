@@ -43,9 +43,9 @@ export default function HistoryPage() {
 
       <div style={{ flex: 1, overflow: "auto" }}>
         {/* Topbar */}
-        <div style={{ background: "#fff", height: "56px", padding: "0 28px", display: "flex", alignItems: "center", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
+        {/* <div style={{ background: "#fff", height: "56px", padding: "0 28px", display: "flex", alignItems: "center", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
           <div style={{ fontSize: "13px", color: "#6b7280", fontWeight: "500" }}>History</div>
-        </div>
+        </div> */}
 
         <div style={{ padding: "28px 32px" }}>
           <div style={{ marginBottom: "24px" }}>
