@@ -106,21 +106,26 @@ const openResume = (resume) => {
 
       {/* PDF Viewer Modal */}
       {viewingResume && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.85)", zIndex: 1000, display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: "#1e293b", flexShrink: 0 }}>
-            <span style={{ color: "white", fontWeight: "600", fontSize: "14px" }}>📄 {viewingResume.name}</span>
-            <div style={{ display: "flex", gap: "10px" }}>
-              <button onClick={() => window.open(viewingResume.url, "_blank")} style={{ background: "#2563eb", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>⬇️ Download</button>
-              <button onClick={() => setViewingResume(null)} style={{ background: "#ef4444", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>✕ Close</button>
-            </div>
-          </div>
-          <iframe
-            src={viewingResume.url}
-            style={{ flex: 1, border: "none", width: "100%", height: "100%" }}
-            title="Resume Preview"
-          />
-        </div>
-      )}
+  <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.85)", zIndex: 1000, display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: "#1e293b", flexShrink: 0 }}>
+      <span style={{ color: "white", fontWeight: "600", fontSize: "14px" }}>📄 {viewingResume.name}</span>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <button onClick={() => window.open(viewingResume.url, "_blank")} style={{ background: "#2563eb", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>⬇️ Download</button>
+        <button onClick={() => setViewingResume(null)} style={{ background: "#ef4444", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>✕ Close</button>
+      </div>
+    </div>
+    <object
+      data={viewingResume.url}
+      type="application/pdf"
+      style={{ flex: 1, width: "100%", height: "100%" }}
+    >
+      <div style={{ color: "white", textAlign: "center", padding: "40px" }}>
+        <p>PDF cannot be displayed in browser.</p>
+        <button onClick={() => window.open(viewingResume.url, "_blank")} style={{ background: "#2563eb", color: "white", border: "none", borderRadius: "6px", padding: "10px 20px", cursor: "pointer", fontWeight: "600" }}>⬇️ Download PDF</button>
+      </div>
+    </object>
+  </div>
+)}
     </div>
   );
 }
