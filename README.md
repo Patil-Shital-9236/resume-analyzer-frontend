@@ -1,3 +1,6 @@
+
+---
+
 # Resume Analyzer Frontend
 
 A modern, responsive web application that analyzes resumes using AI and provides detailed feedback, match scores, and improvement suggestions based on job descriptions.
@@ -16,8 +19,9 @@ Built using **Next.js, TypeScript, and Tailwind CSS** for a fast and scalable fr
 * Project Structure
 * Environment Variables
 * Build & Deployment
-* Deployment on Render
+* Deployment on Vercel
 * Usage
+* API Integration
 * Contributing
 * License
 * Support
@@ -26,9 +30,9 @@ Built using **Next.js, TypeScript, and Tailwind CSS** for a fast and scalable fr
 
 #  Features
 
-• Upload resumes in **PDF or DOCX format**
+• Upload resumes in **PDF format**
 • Analyze resumes against **job descriptions**
-• AI-generated **match score (0-100)**
+• AI-generated **match score (0–100)**
 • Identify **missing skills**
 • Detect **resume weaknesses**
 • Provide **improvement plan and suggestions**
@@ -39,14 +43,14 @@ Built using **Next.js, TypeScript, and Tailwind CSS** for a fast and scalable fr
 
 #  Tech Stack
 
-| Layer              | Technology    |
-| ------------------ | ------------- |
-| Frontend Framework | Next.js       |
-| Language           | TypeScript    |
-| Styling            | Tailwind CSS  |
-| State Management   | React Hooks   |
-| API Communication  | Fetch / Axios |
-| Deployment         | Render        |
+| Layer              | Technology   |
+| ------------------ | ------------ |
+| Frontend Framework | Next.js      |
+| Language           | TypeScript   |
+| Styling            | Tailwind CSS |
+| State Management   | React Hooks  |
+| API Communication  | Fetch API    |
+| Deployment         | Vercel       |
 
 ---
 
@@ -103,7 +107,7 @@ pnpm install
 
 ---
 
-#  Getting Started
+# Getting Started
 
 Start the development server
 
@@ -141,8 +145,11 @@ resume-analyzer-frontend
 │   ├── components
 │   │   └── reusable UI components
 │   │
-│   └── services
-│       └── API service functions
+│   ├── services
+│   │   └── api.ts
+│   │
+│   └── utils
+│       └── helper functions
 │
 ├── public
 │   └── static assets
@@ -163,19 +170,18 @@ Create a `.env.local` file in the root folder.
 Example:
 
 ```
-NEXT_PUBLIC_API_URL=https://your-backend-api.com
-NEXT_PUBLIC_API_TIMEOUT=30000
+NEXT_PUBLIC_API_URL=https://resume-analyzer-backend-uk1x.onrender.com
 ```
 
 Important:
 
 Only variables starting with **NEXT_PUBLIC_** are exposed to the browser.
 
-Never expose secret keys in frontend.
+Never expose secret keys in frontend applications.
 
 ---
 
-#  Build & Run Production
+# 🔨 Build & Run Production
 
 Build the application
 
@@ -191,23 +197,23 @@ npm start
 
 ---
 
-#  Deployment on Render
+# Deployment on Vercel
 
-### Step 1 Create Render Account
+### Step 1 Create Vercel Account
 
 Go to
 
 ```
-https://render.com
+https://vercel.com
 ```
 
 Sign up using GitHub.
 
 ---
 
-### Step 2 Create New Web Service
+### Step 2 Import Project
 
-Dashboard → **New + → Web Service**
+Click **Add New → Project**
 
 Select repository
 
@@ -219,13 +225,13 @@ resume-analyzer-frontend
 
 ### Step 3 Configure Deployment
 
-| Setting       | Value                        |
-| ------------- | ---------------------------- |
-| Environment   | Node                         |
-| Branch        | main                         |
-| Build Command | npm install && npm run build |
-| Start Command | npm start                    |
-| Node Version  | 18                           |
+| Setting          | Value         |
+| ---------------- | ------------- |
+| Framework Preset | Next.js       |
+| Build Command    | npm run build |
+| Output Directory | .next         |
+| Install Command  | npm install   |
+| Node Version     | 18+           |
 
 ---
 
@@ -234,7 +240,7 @@ resume-analyzer-frontend
 Example
 
 ```
-NEXT_PUBLIC_API_URL=https://your-backend-api.com
+NEXT_PUBLIC_API_URL=https://resume-analyzer-backend-uk1x.onrender.com
 ```
 
 ---
@@ -244,13 +250,13 @@ NEXT_PUBLIC_API_URL=https://your-backend-api.com
 Click
 
 ```
-Create Web Service
+Deploy
 ```
 
 After deployment your app will be available at
 
 ```
-https://resume-analyzer-frontend.onrender.com
+https://resume-analyzer-frontend-eight-nu.vercel.app
 ```
 
 ---
@@ -268,11 +274,11 @@ Supported formats:
 
 ---
 
-### 2 Paste Job Description
+### 2 Enter Job Description
 
 User pastes the target job description.
 
-Optional fields
+Optional fields:
 
 * Job Title
 * Company
@@ -293,14 +299,24 @@ System performs AI analysis and returns:
 
 #  API Integration
 
-Frontend communicates with backend APIs.
+Frontend communicates with backend APIs hosted on **Render**.
 
-Example endpoints
+Base API URL
 
 ```
-POST /upload-resume
-POST /full-analysis
-GET /analysis-history
+https://resume-analyzer-backend-uk1x.onrender.com
+```
+
+Example endpoints used by the frontend:
+
+```
+POST /api/auth/register
+POST /api/auth/login
+POST /api/resume/upload
+POST /api/analyze
+POST /api/full-analysis
+POST /api/jd/analyze
+GET  /api/user/profile
 ```
 
 Backend handles:
@@ -309,6 +325,7 @@ Backend handles:
 * AI analysis
 * Skill extraction
 * Score calculation
+* User authentication
 
 ---
 
@@ -342,6 +359,12 @@ git push origin feature/new-feature
 
 ---
 
+#  License
+
+This project is licensed under the MIT License.
+
+---
+
 #  Support
 
 If you encounter issues:
@@ -354,7 +377,7 @@ https://github.com/Patil-Shital-9236/resume-analyzer-frontend/issues
 
 ---
 
-#  Author
+# 👨‍💻 Author
 
 Shital Patil
 
