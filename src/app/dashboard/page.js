@@ -94,7 +94,6 @@ export default function DashboardPage() {
       <div style={{ flex: 1, overflow: "auto" }}>
         {/* Topbar */}
         <div style={{ background: "#fff", height: "56px", padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
-          // <div style={{ fontSize: "13px", color: "#6b7280", fontWeight: "500" }}>Dashboard</div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{ width: "33px", height: "33px", borderRadius: "50%", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
