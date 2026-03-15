@@ -154,7 +154,7 @@ export default function DashboardPage() {
               <div onDragOver={e => { e.preventDefault(); setDragOver(true); }} onDragLeave={() => setDragOver(false)}
                 onDrop={e => { e.preventDefault(); setDragOver(false); setFile(e.dataTransfer.files[0]); setUploadMsg(""); }}
                 onClick={() => document.getElementById("fileInput").click()}
-                style={{ border: `2px dashed ${ dragOver ? "#1d4ed8" : file ? "#1d4ed8" : "#e5e7eb"}`, borderRadius: "10px", padding: "30px 16px", textAlign: "center", cursor: "pointer", marginBottom: "14px", background: dragOver ? "#eff6ff" : file ? "#f0fdf4" : "#fafafa", transition: "all 0.2s" }}>
+                style={{ border: `2px dashed ${ dragOver ? "#1d4ed8" : file ? "#1d4ed8" : "#e5e7eb"}`, borderRadius: "10px", padding: "30px 16px", textAlign: "center", cursor: "pointer", marginBottom: "14px", background: dragOver ? "#eff6ff" : file ? "#eff6ff" : "#fafafa", transition: "all 0.2s" }}>
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
                   {file
                     ? <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
