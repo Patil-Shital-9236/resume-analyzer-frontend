@@ -61,9 +61,9 @@ export default function ProfilePage() {
 
       <div style={{ flex: 1, overflow: "auto" }}>
         {/* Topbar */}
-        <div style={{ background: "#fff", height: "56px", padding: "0 28px", display: "flex", alignItems: "center", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
+        {/* <div style={{ background: "#fff", height: "56px", padding: "0 28px", display: "flex", alignItems: "center", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
           <div style={{ fontSize: "13px", color: "#6b7280", fontWeight: "500" }}>Profile</div>
-        </div>
+        </div> */}
 
         <div style={{ padding: "28px 32px", maxWidth: "1780px", margin: "0 auto" }}>
 
