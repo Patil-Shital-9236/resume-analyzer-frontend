@@ -42,12 +42,8 @@ export default function MyResumesPage() {
 
 const openResume = (resume) => {
   if (resume.file_url) {
-    if (resume.file_type === "pdf") {
-      const proxyUrl = `/api/pdf-proxy?url=${encodeURIComponent(resume.file_url)}`;
-      window.open(proxyUrl, "_blank");
-    } else {
-      window.open(resume.file_url, "_blank");
-    }
+    // Just download/open directly - works for both PDF and DOCX
+    window.open(resume.file_url, "_blank");
   } else {
     alert("Please re-upload this resume to enable viewing.");
   }
