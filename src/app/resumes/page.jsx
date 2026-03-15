@@ -40,14 +40,17 @@ export default function MyResumesPage() {
     setTimeout(() => setMsg(""), 3000);
   };
 
-const openResume = (resume) => {
-  if (resume.file_url) {
-    // Just download/open directly - works for both PDF and DOCX
-    window.open(resume.file_url, "_blank");
-  } else {
-    alert("Please re-upload this resume to enable viewing.");
-  }
-};
+  const openResume = (resume) => {
+    if (resume.file_url) {
+      if (resume.file_type === "pdf") {
+        setViewingResume({ url: resume.file_url, name: resume.file_name });
+      } else {
+        window.open(resume.file_url, "_blank");
+      }
+    } else {
+      alert("Please re-upload this resume to enable viewing.");
+    }
+  };
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#f0f4f8", fontFamily: "'Segoe UI', sans-serif" }}>
@@ -87,7 +90,7 @@ const openResume = (resume) => {
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <button onClick={() => setLatest(r.id)} style={{ padding: "8px 16px", background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
+                  <button onClick={(e) => { e.stopPropagation(); setLatest(r.id); }} style={{ padding: "8px 16px", background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
                     Set as Latest
                   </button>
                   <button onClick={(e) => { e.stopPropagation(); deleteResume(r.id); }} style={{ padding: "8px 16px", background: "#fee2e2", color: "#dc2626", border: "1px solid #fecaca", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
@@ -102,26 +105,18 @@ const openResume = (resume) => {
 
       {/* PDF Viewer Modal */}
       {viewingResume && (
-  <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.85)", zIndex: 1000, display: "flex", flexDirection: "column" }}>
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: "#1e293b", flexShrink: 0 }}>
-      <span style={{ color: "white", fontWeight: "600", fontSize: "14px" }}>📄 {viewingResume.name}</span>
-      <div style={{ display: "flex", gap: "10px" }}>
-        <button onClick={() => window.open(viewingResume.url, "_blank")} style={{ background: "#2563eb", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>⬇️ Download</button>
-        <button onClick={() => setViewingResume(null)} style={{ background: "#ef4444", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>✕ Close</button>
-      </div>
-    </div>
-    <object
-      data={viewingResume.url}
-      type="application/pdf"
-      style={{ flex: 1, width: "100%", height: "100%" }}
-    >
-      <div style={{ color: "white", textAlign: "center", padding: "40px" }}>
-        <p>PDF cannot be displayed in browser.</p>
-        <button onClick={() => window.open(viewingResume.url, "_blank")} style={{ background: "#2563eb", color: "white", border: "none", borderRadius: "6px", padding: "10px 20px", cursor: "pointer", fontWeight: "600" }}>⬇️ Download PDF</button>
-      </div>
-    </object>
-  </div>
-)}
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.85)", zIndex: 1000, display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: "#1e293b", flexShrink: 0 }}>
+            <span style={{ color: "white", fontWeight: "600", fontSize: "14px" }}>📄 {viewingResume.name}</span>
+            <button onClick={() => setViewingResume(null)} style={{ background: "#ef4444", color: "white", border: "none", borderRadius: "6px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", fontSize: "13px" }}>✕ Close</button>
+          </div>
+          <iframe
+            src={viewingResume.url}
+            style={{ flex: 1, border: "none", width: "100%", height: "100%" }}
+            title="Resume Preview"
+          />
+        </div>
+      )}
     </div>
   );
 }
