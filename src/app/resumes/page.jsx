@@ -33,7 +33,7 @@ export default function MyResumesPage() {
 
   const deleteResume = async (resumeId) => {
     if (!confirm("Delete this resume?")) return;
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/resumes/${resumeId}`, { method: "DELETE" });
+    await fetch(`http://localhost:5000/api/user/resumes/${resumeId}`, { method: "DELETE" });
     setMsg("🗑️ Resume deleted");
     fetchResumes();
     setTimeout(() => setMsg(""), 3000);
@@ -76,11 +76,11 @@ export default function MyResumesPage() {
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                  {!r.is_latest && (
+                  {/* {!r.is_latest && (
                     <button onClick={() => setLatest(r.id)} style={{ padding: "8px 16px", background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
                       Set as Latest
                     </button>
-                  )}
+                  )} */}
                   <button onClick={() => deleteResume(r.id)} style={{ padding: "8px 16px", background: "#fee2e2", color: "#dc2626", border: "1px solid #fecaca", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
                     🗑️ Delete
                   </button>
