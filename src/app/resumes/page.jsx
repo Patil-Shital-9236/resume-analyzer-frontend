@@ -41,7 +41,16 @@ export default function MyResumesPage() {
 
  const openResume = (resume) => {
   if (resume.file_url) {
-    window.open(resume.file_url, "_blank");
+    if (resume.file_type === "pdf") {
+      const pdfUrl = resume.file_url.replace(
+        "/raw/upload/",
+        "/raw/upload/fl_attachment:false/"
+      );
+      window.open(pdfUrl, "_blank");
+    } else {
+      // DOCX - direct download
+      window.open(resume.file_url, "_blank");
+    }
   } else {
     alert("Please re-upload this resume to enable viewing.");
   }
