@@ -39,15 +39,18 @@ export default function MyResumesPage() {
     setTimeout(() => setMsg(""), 3000);
   };
 
-  const openResume = (resume) => {
+ const openResume = (resume) => {
   if (resume.file_url) {
-    // Add fl_inline flag for PDFs to display in browser
-    const url = resume.file_type === "pdf" 
-      ? resume.file_url.replace("/upload/", "/upload/fl_inline/")
-      : resume.file_url;
-    window.open(url, "_blank");
+    if (resume.file_type === "pdf") {
+      // Use Google Docs viewer for PDFs
+      const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(resume.file_url)}&embedded=true`;
+      window.open(googleViewerUrl, "_blank");
+    } else {
+      // DOCX files - direct download
+      window.open(resume.file_url, "_blank");
+    }
   } else {
-    alert("This resume was uploaded before cloud storage was enabled. Please re-upload it.");
+    alert("Please re-upload this resume to enable viewing.");
   }
 };
 
