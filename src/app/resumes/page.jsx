@@ -43,7 +43,7 @@ export default function MyResumesPage() {
     <div style={{ display: "flex", minHeight: "100vh", background: "#f0f4f8", fontFamily: "'Segoe UI', sans-serif" }}>
       <Sidebar active="resumes" />
       <div style={{ flex: 1, padding: "28px", overflow: "auto" }}>
-        <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#1f2937", marginBottom: "6px" }}>📄 My Resumes</h2>
+        <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#1f2937", marginBottom: "6px" }}>My Resumes</h2>
         <p style={{ color: "#6b7280", fontSize: "14px", marginBottom: "24px" }}>All your uploaded resumes</p>
 
         {msg && <div style={{ background: "#dcfce7", color: "#16a34a", padding: "10px 16px", borderRadius: "8px", marginBottom: "16px", fontSize: "14px" }}>{msg}</div>}
