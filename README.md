@@ -181,7 +181,7 @@ Never expose secret keys in frontend applications.
 
 ---
 
-# 🔨 Build & Run Production
+#  Build & Run Production
 
 Build the application
 
@@ -377,7 +377,7 @@ https://github.com/Patil-Shital-9236/resume-analyzer-frontend/issues
 
 ---
 
-# 👨‍💻 Author
+#  Author
 
 Shital Patil
 
