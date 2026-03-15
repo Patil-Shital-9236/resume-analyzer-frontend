@@ -14,7 +14,7 @@ const navItems = [
   { id: "profile",   label: "Profile",      path: "/profile"   },
   { id: "dashboard", label: "Dashboard",    path: "/dashboard" },
   { id: "resumes",   label: "My Resumes",   path: "/resumes"   },
-  { id: "analysis",  label: "Job Analysis", path: "/analysis"  },
+  // { id: "analysis",  label: "Job Analysis", path: "/analysis"  },
   { id: "history",   label: "History",      path: "/history"   },
 ];
 
