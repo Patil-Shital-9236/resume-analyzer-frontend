@@ -39,16 +39,12 @@ export default function MyResumesPage() {
     setTimeout(() => setMsg(""), 3000);
   };
 
- const openResume = (resume) => {
+const openResume = (resume) => {
   if (resume.file_url) {
     if (resume.file_type === "pdf") {
-      const pdfUrl = resume.file_url.replace(
-        "/raw/upload/",
-        "/raw/upload/fl_attachment:false/"
-      );
-      window.open(pdfUrl, "_blank");
+      const proxyUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/resume/view?url=${encodeURIComponent(resume.file_url)}`;
+      window.open(proxyUrl, "_blank");
     } else {
-      // DOCX - direct download
       window.open(resume.file_url, "_blank");
     }
   } else {
