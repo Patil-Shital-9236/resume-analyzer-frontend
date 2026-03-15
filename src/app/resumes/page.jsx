@@ -40,12 +40,16 @@ export default function MyResumesPage() {
   };
 
   const openResume = (resume) => {
-    if (resume.file_url) {
-      window.open(resume.file_url, "_blank");
-    } else {
-      alert("This resume was uploaded before cloud storage was enabled. Please re-upload it.");
-    }
-  };
+  if (resume.file_url) {
+    // Add fl_inline flag for PDFs to display in browser
+    const url = resume.file_type === "pdf" 
+      ? resume.file_url.replace("/upload/", "/upload/fl_inline/")
+      : resume.file_url;
+    window.open(url, "_blank");
+  } else {
+    alert("This resume was uploaded before cloud storage was enabled. Please re-upload it.");
+  }
+};
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#f0f4f8", fontFamily: "'Segoe UI', sans-serif" }}>
