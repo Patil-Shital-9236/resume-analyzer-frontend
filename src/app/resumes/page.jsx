@@ -40,18 +40,18 @@ export default function MyResumesPage() {
     setTimeout(() => setMsg(""), 3000);
   };
 
-  const openResume = (resume) => {
-    if (resume.file_url) {
-      if (resume.file_type === "pdf") {
-        const proxyUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/resume/view?url=${encodeURIComponent(resume.file_url)}`;
-        setViewingResume({ url: proxyUrl, name: resume.file_name });
-      } else {
-        window.open(resume.file_url, "_blank");
-      }
+ const openResume = (resume) => {
+  if (resume.file_url) {
+    if (resume.file_type === "pdf") {
+      const proxyUrl = `/api/pdf-proxy?url=${encodeURIComponent(resume.file_url)}`;
+      setViewingResume({ url: proxyUrl, name: resume.file_name });
     } else {
-      alert("Please re-upload this resume to enable viewing.");
+      window.open(resume.file_url, "_blank");
     }
-  };
+  } else {
+    alert("Please re-upload this resume to enable viewing.");
+  }
+};
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#f0f4f8", fontFamily: "'Segoe UI', sans-serif" }}>
