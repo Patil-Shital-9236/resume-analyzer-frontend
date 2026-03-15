@@ -40,11 +40,11 @@ export default function MyResumesPage() {
     setTimeout(() => setMsg(""), 3000);
   };
 
- const openResume = (resume) => {
+const openResume = (resume) => {
   if (resume.file_url) {
     if (resume.file_type === "pdf") {
       const proxyUrl = `/api/pdf-proxy?url=${encodeURIComponent(resume.file_url)}`;
-      setViewingResume({ url: proxyUrl, name: resume.file_name });
+      window.open(proxyUrl, "_blank");
     } else {
       window.open(resume.file_url, "_blank");
     }
