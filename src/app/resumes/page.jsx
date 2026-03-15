@@ -41,14 +41,7 @@ export default function MyResumesPage() {
 
  const openResume = (resume) => {
   if (resume.file_url) {
-    if (resume.file_type === "pdf") {
-      // Use Google Docs viewer for PDFs
-      const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(resume.file_url)}&embedded=true`;
-      window.open(googleViewerUrl, "_blank");
-    } else {
-      // DOCX files - direct download
-      window.open(resume.file_url, "_blank");
-    }
+    window.open(resume.file_url, "_blank");
   } else {
     alert("Please re-upload this resume to enable viewing.");
   }
