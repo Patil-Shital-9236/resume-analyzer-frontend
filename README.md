@@ -30,13 +30,13 @@ Built using **Next.js, TypeScript, and Tailwind CSS** for a fast and scalable fr
 
 #  Features
 
-• Upload resumes in **PDF format**
-• Analyze resumes against **job descriptions**
-• AI-generated **match score (0–100)**
-• Identify **missing skills**
-• Detect **resume weaknesses**
-• Provide **improvement plan and suggestions**
-• Clean **dashboard UI with analysis results**
+• Upload resumes in **PDF format**<br>
+• Analyze resumes against **job descriptions**<br>
+• AI-generated **match score (0–100)**<br>
+• Identify **missing skills**<br>
+• Detect **resume weaknesses**<br>
+• Provide **improvement plan and suggestions**<br>
+• Clean **dashboard UI with analysis results**<br>
 • Fully **responsive design**
 
 ---
