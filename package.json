@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.221.0",
     "next": "14.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"

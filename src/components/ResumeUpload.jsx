@@ -3,32 +3,33 @@
 import { useState } from "react";
 import { uploadResume } from "@/services/api";
 
-export default function ResumeUpload(){
+export default function ResumeUpload() {
 
-  const [file,setFile] = useState(null);
+  const [file, setFile] = useState(null);
 
   const handleUpload = async () => {
 
-    if(!file){
+    if (!file) {
       alert("Select file first");
       return;
     }
 
-    const formData = new FormData();
+    try {
+      const res = await uploadResume(
+        file,
+        localStorage.getItem("userId")
+      );
 
-    formData.append("resume",file);
-    formData.append("userId",localStorage.getItem("userId"));
+      console.log("✅ Upload success:", res);
+      alert("Resume uploaded");
 
-    const res = await uploadResume(formData);
-
-    console.log(res);
-
-    alert("Resume uploaded");
-
+    } catch (err) {
+      console.error("❌ Upload error:", err.message);
+      alert(err.message);
+    }
   };
 
-  return(
-
+  return (
     <div className="bg-white p-6 rounded-xl shadow">
 
       <h2 className="text-xl font-semibold mb-4">
@@ -38,7 +39,11 @@ export default function ResumeUpload(){
       <input
         type="file"
         className="mb-4"
-        onChange={(e)=>setFile(e.target.files[0])}
+        accept=".pdf,.docx"
+        onChange={(e) => {
+          console.log("📂 Selected:", e.target.files[0]); // DEBUG
+          setFile(e.target.files[0]);
+        }}
       />
 
       <button
@@ -49,7 +54,5 @@ export default function ResumeUpload(){
       </button>
 
     </div>
-
   );
-
 }

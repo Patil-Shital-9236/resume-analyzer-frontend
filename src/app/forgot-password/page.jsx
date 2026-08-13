@@ -13,8 +13,9 @@ export default function ForgotPasswordPage() {
     if (!email.trim()) { setError("Please enter your email address"); return; }
     if (!/\S+@\S+\.\S+/.test(email)) { setError("Please enter a valid email"); return; }
     setLoading(true); setError("");
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot-password`, {
+      const res = await fetch(`${apiBase}/api/auth/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

@@ -13,7 +13,8 @@ export default function HistoryPage() {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/history/${userId}`)
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    fetch(`${apiBase}/api/user/history/${userId}`)
       .then(r => r.json())
       .then(data => { setHistory(data.history || []); setLoading(false); })
       .catch(() => setLoading(false));

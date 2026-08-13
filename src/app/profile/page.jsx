@@ -17,10 +17,11 @@ export default function ProfilePage() {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
 
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
     Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/profile/${userId}`).then(r => r.json()),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/history/${userId}`).then(r => r.json()).catch(() => ({ history: [] })),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/resumes/${userId}`).then(r => r.json()).catch(() => ({ resumes: [] })),
+      fetch(`${apiBase}/api/user/profile/${userId}`).then(r => r.json()),
+      fetch(`${apiBase}/api/user/history/${userId}`).then(r => r.json()).catch(() => ({ history: [] })),
+      fetch(`${apiBase}/api/user/resumes/${userId}`).then(r => r.json()).catch(() => ({ resumes: [] })),
     ]).then(([profileData, historyData, resumeData]) => {
       const user = profileData.user || profileData;
       setProfile(user);
@@ -35,9 +36,10 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     const userId = localStorage.getItem("userId");
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
     setSaving(true); setSaveMsg("");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/profile/${userId}`, {
+      const res = await fetch(`${apiBase}/api/user/profile/${userId}`, {
         method: "PUT", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ full_name: fullName }),
       }).then(r => r.json());

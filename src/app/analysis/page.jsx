@@ -11,7 +11,8 @@ export default function JobAnalysisPage() {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/job-descriptions/${userId}`)
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    fetch(`${apiBase}/api/user/job-descriptions/${userId}`)
       .then(r => r.json())
       .then(data => { setJds(data.jobDescriptions || []); setLoading(false); })
       .catch(() => setLoading(false));
