@@ -62,7 +62,8 @@ export default function RegisterPage() {
     setSuccess("");
 
     try {
-      const guestResumeId = localStorage.getItem("guestResumeId");
+      let guestResumeId = localStorage.getItem("guestResumeId");
+      if (guestResumeId === "null" || guestResumeId === "undefined") guestResumeId = null;
       
       const res = await registerUser({ 
         full_name: form.name.trim(), 

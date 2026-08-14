@@ -15,7 +15,8 @@ export default function LoginPage() {
     if (!email || !password) { setError("Please fill all fields"); return; }
     setLoading(true); setError("");
     try {
-      const guestResumeId = localStorage.getItem("guestResumeId");
+      let guestResumeId = localStorage.getItem("guestResumeId");
+      if (guestResumeId === "null" || guestResumeId === "undefined") guestResumeId = null;
       
       const res = await loginUser({ 
         email, 
