@@ -139,7 +139,9 @@ export default function DashboardPage() {
         <div style={{ padding: "28px 32px" }}>
           {/* Header */}
           <div style={{ marginBottom: "24px" }}>
-            <h1 style={{ fontSize: "20px", fontWeight: "700", color: "#111827", margin: "0 0 5px" }}>Welcome back, {userName}</h1>
+            <h1 style={{ fontSize: "20px", fontWeight: "700", color: "#111827", margin: "0 0 5px" }}>
+              {userId ? `Welcome back, ${userName}` : `Welcome, ${userName}`}
+            </h1>
             <p style={{ color: "#6b7280", fontSize: "13.5px", margin: 0 }}>Upload your resume and a job description to get your AI match score.</p>
           </div>
 
