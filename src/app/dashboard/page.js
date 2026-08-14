@@ -24,18 +24,32 @@ export default function DashboardPage() {
   useEffect(() => {
     const name = localStorage.getItem("userName");
     const uid = localStorage.getItem("userId");
-    if (!uid) { router.push("/login"); return; }
-    setUserName(name || "User");
-    setUserId(uid);
+    
+    // Allow guests (uid can be null)
+    if (uid) {
+      setUserName(name || "User");
+      setUserId(uid);
+    } else {
+      setUserName("Guest User");
+      setUserId(null);
+    }
   }, []);
 
   const handleUpload = async () => {
     if (!file) { setUploadMsg("error:Please select a file"); return; }
+    
+    const guestCount = parseInt(localStorage.getItem("guestAnalysisCount") || "0");
+    if (!userId && guestCount >= 1) {
+      setUploadMsg("error:You've reached your free limit. Please register to continue.");
+      setTimeout(() => router.push("/register"), 2500);
+      return;
+    }
+
     setUploading(true); setUploadMsg("");
     try {
       const formData = new FormData();
       formData.append("resume", file);
-      formData.append("userId", userId);
+      formData.append("userId", userId || "null");
       const res = await uploadResume(formData);
       if (res.resumeId) { setUploadedResumeId(res.resumeId); setUploadMsg("success:Resume uploaded!"); }
       else { setUploadMsg("error:" + (res.error || "Upload failed")); }
@@ -46,10 +60,24 @@ export default function DashboardPage() {
   const handleAnalyze = async () => {
     if (!jobDesc.trim()) { setAnalyzeError("Please paste a job description"); return; }
     if (!uploadedResumeId) { setAnalyzeError("Please upload a resume first"); return; }
+
+    const guestCount = parseInt(localStorage.getItem("guestAnalysisCount") || "0");
+    if (!userId && guestCount >= 1) {
+      setAnalyzeError("You've reached your free limit. Please register to continue.");
+      setTimeout(() => router.push("/register"), 2500);
+      return;
+    }
+
     setAnalyzing(true); setAnalyzeError(""); setResult(null); setActiveTab("overview");
     try {
-      const res = await runFullAnalysis({ userId, resumeId: uploadedResumeId, title: jobTitle, company: company || "Unknown Company", jdText: jobDesc });
-      if (res.analysis) setResult(res.analysis);
+      const res = await runFullAnalysis({ userId: userId || null, resumeId: uploadedResumeId, title: jobTitle, company: company || "Unknown Company", jdText: jobDesc });
+      if (res.analysis) {
+        setResult(res.analysis);
+        if (!userId) {
+          localStorage.setItem("guestAnalysisCount", "1");
+          localStorage.setItem("guestResumeId", uploadedResumeId);
+        }
+      }
       else setAnalyzeError(res.error || "Analysis failed");
     } catch { setAnalyzeError("Server error"); }
     setAnalyzing(false);

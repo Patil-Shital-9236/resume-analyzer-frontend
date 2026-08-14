@@ -62,10 +62,22 @@ export default function RegisterPage() {
     setSuccess("");
 
     try {
-      const res = await registerUser({ full_name: form.name.trim(), email: form.email.trim(), password: form.password });
+      const guestResumeId = localStorage.getItem("guestResumeId");
+      
+      const res = await registerUser({ 
+        full_name: form.name.trim(), 
+        email: form.email.trim(), 
+        password: form.password,
+        guestResumeId: guestResumeId || undefined
+      });
 
       if (res.user || res.message === "User registered successfully") {
         setSuccess("Account created successfully! Redirecting to login...");
+        
+        // Clear guest items
+        localStorage.removeItem("guestResumeId");
+        localStorage.removeItem("guestAnalysisCount");
+
         setForm({ name: "", email: "", password: "", confirm: "" });
         setErrors({});
         setTimeout(() => router.push("/login"), 1500);

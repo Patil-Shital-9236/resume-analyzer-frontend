@@ -15,11 +15,23 @@ export default function LoginPage() {
     if (!email || !password) { setError("Please fill all fields"); return; }
     setLoading(true); setError("");
     try {
-      const res = await loginUser({ email, password });
+      const guestResumeId = localStorage.getItem("guestResumeId");
+      
+      const res = await loginUser({ 
+        email, 
+        password,
+        guestResumeId: guestResumeId || undefined
+      });
+      
       if (res.token) {
         localStorage.setItem("userId", res.userId);
         localStorage.setItem("token", res.token);
         localStorage.setItem("userName", res.full_name || email);
+        
+        // Clear guest items
+        localStorage.removeItem("guestResumeId");
+        localStorage.removeItem("guestAnalysisCount");
+
         router.push("/dashboard");
       } else {
         setError(res.message || "Login failed");
