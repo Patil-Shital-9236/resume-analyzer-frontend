@@ -74,7 +74,7 @@ export default function Sidebar({ active }) {
               <span style={{ display: "flex", flexShrink: 0 }}>{icons[item.id]}</span>
               <span style={{ fontSize: "13.5px", fontWeight: isActive ? "600" : "400" }}>{item.label}</span>
               {isActive && (
-                <span style={{ marginLeft: "auto", width: "5px", height: "5px", borderRadius: "50%", background: "#60a5fa" }} />
+                <span style={{ marginLeft: "auto", width: "5px", height: "5px", borderRadius: "50%", background: "#FF512F", boxShadow: "0 0 8px rgba(255,81,47,0.8)" }} />
               )}
             </div>
           );

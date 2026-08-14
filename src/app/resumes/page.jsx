@@ -84,7 +84,7 @@ export default function MyResumesPage() {
                   <div>
                     <div style={{ fontWeight: "700", fontSize: "15px", color: "#2563eb", display: "flex", alignItems: "center", gap: "8px", textDecoration: "underline" }}>
                       {r.file_name}
-                      {r.is_latest && <span style={{ background: "#dbeafe", color: "#1d4ed8", padding: "2px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: "600" }}>Latest</span>}
+                      {r.is_latest && <span style={{ background: "#dbeafe", color: "#DD2476", padding: "2px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: "600" }}>Latest</span>}
                     </div>
                     <div style={{ fontSize: "13px", color: "#6b7280", marginTop: "2px" }}>
                       {r.file_type?.toUpperCase()} • Uploaded {new Date(r.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
@@ -93,7 +93,7 @@ export default function MyResumesPage() {
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <button onClick={(e) => { e.stopPropagation(); setLatest(r.id); }} style={{ padding: "8px 16px", background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
+                  <button onClick={(e) => { e.stopPropagation(); setLatest(r.id); }} style={{ padding: "8px 16px", background: "#FFF0F5", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>
                     Set as Latest
                   </button>
                   <button onClick={(e) => { e.stopPropagation(); deleteResume(r.id); }} style={{ padding: "8px 16px", background: "#fee2e2", color: "#dc2626", border: "1px solid #fecaca", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}>

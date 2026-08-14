@@ -58,7 +58,7 @@ export default function ProfilePage() {
   const memberMonth = (d) => d ? new Date(d).toLocaleDateString("en-IN", { month: "short", year: "numeric" }) : "—";
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#f8fafc", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#FAFAFA", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
       <Sidebar active="profile" />
 
       <div style={{ flex: 1, overflow: "auto" }}>
@@ -86,7 +86,7 @@ export default function ProfilePage() {
                 <div style={{ position: "absolute", bottom: "-20px", right: "80px", width: "80px", height: "80px", borderRadius: "50%", background: "rgba(255,255,255,0.03)" }} />
 
                 {/* Avatar */}
-                <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: "linear-gradient(135deg, #3b82f6, #1d4ed8)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", fontWeight: "700", color: "white", flexShrink: 0, border: "3px solid rgba(255,255,255,0.15)", letterSpacing: "-1px" }}>
+                <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: "linear-gradient(135deg, #FF512F, #DD2476)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", fontWeight: "700", color: "white", flexShrink: 0, border: "3px solid rgba(255,255,255,0.15)", letterSpacing: "-1px" }}>
                   {getInitials(profile?.full_name || "")}
                 </div>
 
@@ -128,7 +128,7 @@ export default function ProfilePage() {
                   </div>
                   {!editing ? (
                     <button onClick={() => { setEditing(true); setSaveMsg(""); }}
-                      style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "#f8fafc", border: "1px solid #e5e7eb", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600", color: "#374151", fontFamily: "inherit" }}>
+                      style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: "#FAFAFA", border: "1px solid #e5e7eb", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600", color: "#374151", fontFamily: "inherit" }}>
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                       Edit Profile
                     </button>
@@ -139,7 +139,7 @@ export default function ProfilePage() {
                         Cancel
                       </button>
                       <button onClick={handleSave} disabled={saving}
-                        style={{ padding: "8px 16px", background: "#1d4ed8", border: "none", borderRadius: "8px", cursor: saving ? "not-allowed" : "pointer", fontSize: "13px", fontWeight: "600", color: "white", fontFamily: "inherit", opacity: saving ? 0.7 : 1 }}>
+                        style={{ padding: "8px 16px", background: "#DD2476", border: "none", borderRadius: "8px", cursor: saving ? "not-allowed" : "pointer", fontSize: "13px", fontWeight: "600", color: "white", fontFamily: "inherit", opacity: saving ? 0.7 : 1 }}>
                         {saving ? "Saving..." : "Save Changes"}
                       </button>
                     </div>
@@ -153,9 +153,9 @@ export default function ProfilePage() {
                     <label style={{ fontSize: "11px", fontWeight: "700", color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.6px", display: "block", marginBottom: "7px" }}>Full Name</label>
                     {editing ? (
                       <input type="text" value={fullName} onChange={e => setFullName(e.target.value)} autoFocus
-                        style={{ width: "100%", padding: "10px 13px", border: "1.5px solid #1d4ed8", borderRadius: "8px", fontSize: "14px", color: "#111827", outline: "none", boxSizing: "border-box", fontFamily: "inherit" }} />
+                        style={{ width: "100%", padding: "10px 13px", border: "1.5px solid #DD2476", borderRadius: "8px", fontSize: "14px", color: "#111827", outline: "none", boxSizing: "border-box", fontFamily: "inherit" }} />
                     ) : (
-                      <div style={{ padding: "10px 13px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e5e7eb", fontSize: "14px", color: "#111827" }}>
+                      <div style={{ padding: "10px 13px", background: "#FAFAFA", borderRadius: "8px", border: "1px solid #e5e7eb", fontSize: "14px", color: "#111827" }}>
                         {profile?.full_name || "—"}
                       </div>
                     )}
@@ -165,7 +165,7 @@ export default function ProfilePage() {
                   <div>
                     <label style={{ fontSize: "11px", fontWeight: "700", color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.6px", display: "block", marginBottom: "7px" }}>Email Address</label>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                      <div style={{ flex: 1, padding: "10px 13px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e5e7eb", fontSize: "14px", color: "#6b7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <div style={{ flex: 1, padding: "10px 13px", background: "#FAFAFA", borderRadius: "8px", border: "1px solid #e5e7eb", fontSize: "14px", color: "#6b7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {profile?.email || "—"}
                       </div>
                       <span style={{ fontSize: "10.5px", color: "#9ca3af", background: "#f3f4f6", padding: "4px 8px", borderRadius: "6px", border: "1px solid #e5e7eb", whiteSpace: "nowrap", flexShrink: 0 }}>Locked</span>
@@ -175,7 +175,7 @@ export default function ProfilePage() {
                   {/* Member Since */}
                   <div>
                     <label style={{ fontSize: "11px", fontWeight: "700", color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.6px", display: "block", marginBottom: "7px" }}>Member Since</label>
-                    <div style={{ padding: "10px 13px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e5e7eb", fontSize: "14px", color: "#6b7280" }}>
+                    <div style={{ padding: "10px 13px", background: "#FAFAFA", borderRadius: "8px", border: "1px solid #e5e7eb", fontSize: "14px", color: "#6b7280" }}>
                       {formatDate(profile?.created_at)}
                     </div>
                   </div>
@@ -210,8 +210,8 @@ export default function ProfilePage() {
                 </div>
                 <div style={{ padding: "12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
                   {[
-                    { label: "Go to Dashboard", icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>, path: "/dashboard", color: "#1d4ed8", bg: "#eff6ff" },
-                    { label: "My Resumes",       icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>, path: "/resumes", color: "#7c3aed", bg: "#f5f3ff" },
+                    { label: "Go to Dashboard", icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>, path: "/dashboard", color: "#DD2476", bg: "#FFF0F5" },
+                    { label: "My Resumes",       icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>, path: "/resumes", color: "#DD2476", bg: "#FFF0F5" },
                     { label: "View History",     icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, path: "/history", color: "#059669", bg: "#f0fdf4" },
                   ].map((item, i) => (
                     <button key={i} onClick={() => router.push(item.path)}

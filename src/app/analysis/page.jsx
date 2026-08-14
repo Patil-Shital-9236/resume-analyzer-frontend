@@ -41,7 +41,7 @@ export default function JobAnalysisPage() {
             {jds.map((jd, i) => (
               <div key={jd.id} style={{ background: "white", borderRadius: "16px", padding: "20px", boxShadow: "0 1px 6px rgba(0,0,0,0.06)", border: "1px solid #e5e7eb" }}>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
-                  <div style={{ width: "44px", height: "44px", borderRadius: "10px", background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>💼</div>
+                  <div style={{ width: "44px", height: "44px", borderRadius: "10px", background: "#FFF0F5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", flexShrink: 0 }}>💼</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontWeight: "700", fontSize: "15px", color: "#1f2937", marginBottom: "4px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                       {jd.title || "Unknown Role"}
@@ -54,7 +54,7 @@ export default function JobAnalysisPage() {
                 </div>
                 <button
                   onClick={() => router.push("/history")}
-                  style={{ width: "100%", marginTop: "14px", padding: "8px", background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}
+                  style={{ width: "100%", marginTop: "14px", padding: "8px", background: "#FFF0F5", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600" }}
                 >
                   View Analysis →
                 </button>

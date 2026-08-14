@@ -67,14 +67,14 @@ export default function ResetPasswordContent() {
     return s;
   };
   const str = strength();
-  const strColor = str <= 1 ? "#ef4444" : str === 2 ? "#f59e0b" : str === 3 ? "#3b82f6" : "#10b981";
+  const strColor = str <= 1 ? "#ef4444" : str === 2 ? "#f59e0b" : str === 3 ? "#FF512F" : "#10b981";
   const strLabel = str <= 1 ? "Weak" : str === 2 ? "Fair" : str === 3 ? "Good" : "Strong";
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
+    <div style={{ minHeight: "100vh", background: "#FAFAFA", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
       <div style={{ width: "100%", maxWidth: "420px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+          <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#DD2476,#FF512F)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div style={{ fontSize: "16px", fontWeight: "700", color: "#111827" }}>AI Resume Analyzer</div>
@@ -94,7 +94,7 @@ export default function ResetPasswordContent() {
               <p style={{ color: "#6b7280", fontSize: "13.5px", lineHeight: "1.7", margin: "0 0 20px" }}>
                 This reset link is invalid or has expired.<br />Please request a new one.
               </p>
-              <button onClick={() => router.push("/forgot-password")} style={{ width: "100%", padding: "11px", background: "#1d4ed8", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
+              <button onClick={() => router.push("/forgot-password")} style={{ width: "100%", padding: "11px", background: "#DD2476", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
                 Request New Link
               </button>
             </div>
@@ -173,7 +173,7 @@ export default function ResetPasswordContent() {
               </div>
 
               <button onClick={handleReset} disabled={loading} style={{
-                width: "100%", padding: "11px", background: loading ? "#93c5fd" : "#1d4ed8",
+                width: "100%", padding: "11px", background: loading ? "#93c5fd" : "#DD2476",
                 color: "white", border: "none", borderRadius: "8px", fontWeight: "600",
                 fontSize: "14px", cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit"
               }}>
@@ -183,7 +183,7 @@ export default function ResetPasswordContent() {
           )}
 
           <div style={{ textAlign: "center", marginTop: "20px", paddingTop: "18px", borderTop: "1px solid #f3f4f6" }}>
-            <span onClick={() => router.push("/login")} style={{ fontSize: "13.5px", color: "#1d4ed8", fontWeight: "600", cursor: "pointer" }}>
+            <span onClick={() => router.push("/login")} style={{ fontSize: "13.5px", color: "#DD2476", fontWeight: "600", cursor: "pointer" }}>
               ← Back to Login
             </span>
           </div>

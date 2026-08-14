@@ -44,12 +44,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
+    <div style={{ minHeight: "100vh", background: "#FAFAFA", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
       <div style={{ width: "100%", maxWidth: "420px" }}>
 
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+          <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#DD2476,#FF512F)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div style={{ fontSize: "16px", fontWeight: "700", color: "#111827" }}>AI Resume Analyzer</div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
               <label style={{ fontSize: "11px", fontWeight: "700", color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.5px" }}>Password</label>
               <span
                 onClick={() => router.push("/forgot-password")}
-                style={{ fontSize: "12.5px", color: "#1d4ed8", fontWeight: "600", cursor: "pointer" }}
+                style={{ fontSize: "12.5px", color: "#DD2476", fontWeight: "600", cursor: "pointer" }}
               >
                 Forgot Password?
               </span>
@@ -117,7 +117,7 @@ export default function LoginPage() {
           <button
             onClick={handleLogin}
             disabled={loading}
-            style={{ width: "100%", padding: "11px", background: loading ? "#93c5fd" : "#1d4ed8", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit", marginTop: "20px", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", transition: "background 0.2s" }}
+            style={{ width: "100%", padding: "11px", background: loading ? "#93c5fd" : "#DD2476", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit", marginTop: "20px", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", transition: "background 0.2s" }}
           >
             {loading
               ? <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 0.8s linear infinite" }}><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Signing in...</>
@@ -127,7 +127,7 @@ export default function LoginPage() {
 
           <div style={{ textAlign: "center", marginTop: "20px", paddingTop: "18px", borderTop: "1px solid #f3f4f6" }}>
             <span style={{ fontSize: "13.5px", color: "#6b7280" }}>Don't have an account? </span>
-            <span onClick={() => router.push("/register")} style={{ fontSize: "13.5px", color: "#1d4ed8", fontWeight: "600", cursor: "pointer" }}>
+            <span onClick={() => router.push("/register")} style={{ fontSize: "13.5px", color: "#DD2476", fontWeight: "600", cursor: "pointer" }}>
               Create Account
             </span>
           </div>

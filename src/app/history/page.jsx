@@ -39,7 +39,7 @@ export default function HistoryPage() {
   const circ = 2 * Math.PI * radius;
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#f8fafc", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#FAFAFA", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
       <Sidebar active="history" />
 
       <div style={{ flex: 1, overflow: "auto" }}>
@@ -119,7 +119,7 @@ export default function HistoryPage() {
                             { val: h.weaknesses?.length ?? 0,     label: "Weak",    color: "#ef4444" },
                             { val: h.improvement_plan?.length ?? 0, label: "Steps", color: "#8b5cf6" },
                           ].map((stat, i) => (
-                            <div key={i} style={{ textAlign: "center", background: "#f8fafc", borderRadius: "8px", padding: "5px 10px", border: "1px solid #e5e7eb" }}>
+                            <div key={i} style={{ textAlign: "center", background: "#FAFAFA", borderRadius: "8px", padding: "5px 10px", border: "1px solid #e5e7eb" }}>
                               <div style={{ fontSize: "13px", fontWeight: "700", color: stat.color }}>{stat.val}</div>
                               <div style={{ fontSize: "10px", color: "#9ca3af" }}>{stat.label}</div>
                             </div>
@@ -140,10 +140,10 @@ export default function HistoryPage() {
                         <div style={{ display: "flex", borderBottom: "1px solid #e5e7eb", background: "#fafafa", padding: "0 20px" }}>
                           {tabs.map(t => (
                             <button key={t.id} onClick={() => setTab(h.id, t.id)}
-                              style={{ padding: "11px 14px", border: "none", background: "transparent", cursor: "pointer", fontSize: "12.5px", fontWeight: tab === t.id ? "700" : "500", color: tab === t.id ? "#111827" : "#6b7280", borderBottom: `2px solid ${tab === t.id ? "#7c3aed" : "transparent"}`, display: "flex", alignItems: "center", gap: "5px", fontFamily: "inherit", transition: "all 0.15s" }}>
+                              style={{ padding: "11px 14px", border: "none", background: "transparent", cursor: "pointer", fontSize: "12.5px", fontWeight: tab === t.id ? "700" : "500", color: tab === t.id ? "#111827" : "#6b7280", borderBottom: `2px solid ${tab === t.id ? "#DD2476" : "transparent"}`, display: "flex", alignItems: "center", gap: "5px", fontFamily: "inherit", transition: "all 0.15s" }}>
                               {t.label}
                               {t.count > 0 && (
-                                <span style={{ background: tab === t.id ? "#7c3aed" : "#e5e7eb", color: tab === t.id ? "white" : "#6b7280", borderRadius: "999px", padding: "1px 6px", fontSize: "10px", fontWeight: "700" }}>{t.count}</span>
+                                <span style={{ background: tab === t.id ? "#DD2476" : "#e5e7eb", color: tab === t.id ? "white" : "#6b7280", borderRadius: "999px", padding: "1px 6px", fontSize: "10px", fontWeight: "700" }}>{t.count}</span>
                               )}
                             </button>
                           ))}
@@ -209,10 +209,10 @@ export default function HistoryPage() {
                                   {h.improvement_plan.map((tip, i) => {
                                     const { h: title, b: detail } = parse(tip);
                                     return (
-                                      <div key={i} style={{ display: "flex", gap: "12px", background: "#f5f3ff", borderRadius: "9px", padding: "13px", border: "1px solid #ddd6fe" }}>
-                                        <div style={{ minWidth: "26px", height: "26px", background: "#7c3aed", color: "white", borderRadius: "7px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: "700", flexShrink: 0 }}>{i + 1}</div>
+                                      <div key={i} style={{ display: "flex", gap: "12px", background: "#FFF0F5", borderRadius: "9px", padding: "13px", border: "1px solid #ddd6fe" }}>
+                                        <div style={{ minWidth: "26px", height: "26px", background: "#DD2476", color: "white", borderRadius: "7px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: "700", flexShrink: 0 }}>{i + 1}</div>
                                         <div>
-                                          {title && <div style={{ fontWeight: "700", color: "#5b21b6", fontSize: "12.5px", marginBottom: "3px" }}>{title}</div>}
+                                          {title && <div style={{ fontWeight: "700", color: "#C70039", fontSize: "12.5px", marginBottom: "3px" }}>{title}</div>}
                                           <div style={{ color: "#6b7280", fontSize: "12px", lineHeight: "1.6" }}>{detail}</div>
                                         </div>
                                       </div>

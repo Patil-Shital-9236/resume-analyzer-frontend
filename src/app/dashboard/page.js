@@ -118,7 +118,7 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#f8fafc", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#FAFAFA", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
       <Sidebar active="dashboard" />
 
       <div style={{ flex: 1, overflow: "auto" }}>
@@ -126,7 +126,7 @@ export default function DashboardPage() {
         <div style={{ background: "#fff", height: "56px", padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
           <div style={{ fontSize: "13px", color: "#6b7280", fontWeight: "500" }}></div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{ width: "33px", height: "33px", borderRadius: "50%", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: "33px", height: "33px", borderRadius: "50%", background: "linear-gradient(135deg,#DD2476,#FF512F)", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <div>
@@ -154,7 +154,7 @@ export default function DashboardPage() {
             ].map((s, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-                  <div style={{ width: "22px", height: "22px", borderRadius: "50%", fontSize: "11px", fontWeight: "700", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: s.done ? "#1d4ed8" : "#f1f5f9", color: s.done ? "white" : "#94a3b8", transition: "all 0.3s" }}>
+                  <div style={{ width: "22px", height: "22px", borderRadius: "50%", fontSize: "11px", fontWeight: "700", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: s.done ? "#DD2476" : "#f1f5f9", color: s.done ? "white" : "#94a3b8", transition: "all 0.3s" }}>
                     {s.done ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg> : s.n}
                   </div>
                   <span style={{ fontSize: "12.5px", color: s.done ? "#111827" : "#9ca3af", fontWeight: s.done ? "600" : "400" }}>{s.label}</span>
@@ -169,8 +169,8 @@ export default function DashboardPage() {
             {/* Upload card */}
             <div style={{ background: "#fff", borderRadius: "12px", border: "1px solid #e5e7eb", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", padding: "22px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px", paddingBottom: "14px", borderBottom: "1px solid #f3f4f6" }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "9px", background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <div style={{ width: "36px", height: "36px", borderRadius: "9px", background: "#FFF0F5", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#DD2476" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div>
                   <div style={{ fontSize: "14px", fontWeight: "700", color: "#111827" }}>Upload Resume</div>
@@ -186,7 +186,7 @@ export default function DashboardPage() {
               <div onDragOver={e => { e.preventDefault(); setDragOver(true); }} onDragLeave={() => setDragOver(false)}
                 onDrop={e => { e.preventDefault(); setDragOver(false); setFile(e.dataTransfer.files[0]); setUploadMsg(""); }}
                 onClick={() => document.getElementById("fileInput").click()}
-                style={{ border: `2px dashed ${ dragOver ? "#1d4ed8" : file ? "#1d4ed8" : "#e5e7eb"}`, borderRadius: "10px", padding: "30px 16px", textAlign: "center", cursor: "pointer", marginBottom: "14px", background: dragOver ? "#eff6ff" : file ? "#eff6ff" : "#fafafa", transition: "all 0.2s" }}>
+                style={{ border: `2px dashed ${ dragOver ? "#DD2476" : file ? "#DD2476" : "#e5e7eb"}`, borderRadius: "10px", padding: "30px 16px", textAlign: "center", cursor: "pointer", marginBottom: "14px", background: dragOver ? "#FFF0F5" : file ? "#FFF0F5" : "#fafafa", transition: "all 0.2s" }}>
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
                   {file
                     ? <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
@@ -204,7 +204,7 @@ export default function DashboardPage() {
                   {uploadText}
                 </div>
               )}
-              <button onClick={handleUpload} disabled={uploading || !file} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "none", background: file && !uploading ? "#1d4ed8" : "#e5e7eb", color: file && !uploading ? "white" : "#9ca3af", fontWeight: "600", fontSize: "13.5px", cursor: file && !uploading ? "pointer" : "not-allowed", fontFamily: "inherit", transition: "all 0.2s" }}>
+              <button onClick={handleUpload} disabled={uploading || !file} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "none", background: file && !uploading ? "#DD2476" : "#e5e7eb", color: file && !uploading ? "white" : "#9ca3af", fontWeight: "600", fontSize: "13.5px", cursor: file && !uploading ? "pointer" : "not-allowed", fontFamily: "inherit", transition: "all 0.2s" }}>
                 {uploading ? "Uploading..." : "Upload Resume"}
               </button>
             </div>
@@ -212,8 +212,8 @@ export default function DashboardPage() {
             {/* JD Card */}
             <div style={{ background: "#fff", borderRadius: "12px", border: "1px solid #e5e7eb", boxShadow: "0 1px 4px rgba(0,0,0,0.04)", padding: "22px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px", paddingBottom: "14px", borderBottom: "1px solid #f3f4f6" }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "9px", background: "#f5f3ff", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                <div style={{ width: "36px", height: "36px", borderRadius: "9px", background: "#FFF0F5", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#DD2476" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
                 </div>
                 <div>
                   <div style={{ fontSize: "14px", fontWeight: "700", color: "#111827" }}>Job Description</div>
@@ -233,7 +233,7 @@ export default function DashboardPage() {
               <label style={{ fontSize: "11px", fontWeight: "600", color: "#6b7280", display: "block", marginBottom: "5px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Job Description</label>
               <textarea rows="10" placeholder="Paste the full job description here..." value={jobDesc} onChange={e => { setJobDesc(e.target.value); setAnalyzeError(""); }} style={{ ...inp, resize: "vertical", lineHeight: "1.65", marginBottom: "12px" }} />
               {analyzeError && <div style={{ padding: "9px 12px", borderRadius: "7px", fontSize: "12.5px", marginBottom: "12px", background: "#fef2f2", color: "#dc2626", border: "1px solid #fecaca" }}>{analyzeError}</div>}
-              <button onClick={handleAnalyze} disabled={analyzing} style={{ width: "100%", padding: "11px", background: "#7c3aed", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "13.5px", cursor: analyzing ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", fontFamily: "inherit", opacity: analyzing ? 0.8 : 1, transition: "all 0.2s" }}>
+              <button onClick={handleAnalyze} disabled={analyzing} style={{ width: "100%", padding: "11px", background: "#DD2476", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "13.5px", cursor: analyzing ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", fontFamily: "inherit", opacity: analyzing ? 0.8 : 1, transition: "all 0.2s" }}>
                 {analyzing
                   ? <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 0.8s linear infinite" }}><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Analyzing...</>
                   : <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Run Full Analysis</>
@@ -304,10 +304,10 @@ export default function DashboardPage() {
               <div style={{ display: "flex", borderBottom: "1px solid #e5e7eb", background: "#fafafa", padding: "0 24px" }}>
                 {tabs.map(tab => (
                   <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                    style={{ padding: "13px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: "13px", fontWeight: activeTab === tab.id ? "700" : "500", color: activeTab === tab.id ? "#111827" : "#6b7280", borderBottom: `2px solid ${activeTab === tab.id ? "#7c3aed" : "transparent"}`, display: "flex", alignItems: "center", gap: "6px", transition: "all 0.15s", fontFamily: "inherit" }}>
+                    style={{ padding: "13px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: "13px", fontWeight: activeTab === tab.id ? "700" : "500", color: activeTab === tab.id ? "#111827" : "#6b7280", borderBottom: `2px solid ${activeTab === tab.id ? "#DD2476" : "transparent"}`, display: "flex", alignItems: "center", gap: "6px", transition: "all 0.15s", fontFamily: "inherit" }}>
                     {tab.label}
                     {tab.count !== null && tab.count > 0 && (
-                      <span style={{ background: activeTab === tab.id ? "#7c3aed" : "#e5e7eb", color: activeTab === tab.id ? "white" : "#6b7280", borderRadius: "999px", padding: "1px 7px", fontSize: "11px", fontWeight: "700" }}>{tab.count}</span>
+                      <span style={{ background: activeTab === tab.id ? "#DD2476" : "#e5e7eb", color: activeTab === tab.id ? "white" : "#6b7280", borderRadius: "999px", padding: "1px 7px", fontSize: "11px", fontWeight: "700" }}>{tab.count}</span>
                     )}
                   </button>
                 ))}
@@ -330,11 +330,11 @@ export default function DashboardPage() {
 
                     {/* Score breakdown */}
                     {(result.skills_match_percentage != null || result.experience_match_percentage != null || result.education_match_percentage != null) && (
-                      <div style={{ background: "#f8fafc", borderRadius: "12px", padding: "18px", border: "1px solid #e2e8f0" }}>
+                      <div style={{ background: "#FAFAFA", borderRadius: "12px", padding: "18px", border: "1px solid #e2e8f0" }}>
                         <div style={{ fontSize: "11px", fontWeight: "700", color: "#475569", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "14px" }}>Score Breakdown</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                           {[
-                            { label: "Skills Match", val: result.skills_match_percentage, color: "#3b82f6" },
+                            { label: "Skills Match", val: result.skills_match_percentage, color: "#FF512F" },
                             { label: "Experience Match", val: result.experience_match_percentage, color: "#8b5cf6" },
                             { label: "Education Match", val: result.education_match_percentage, color: "#10b981" },
                           ].filter(x => x.val != null).map((item, i) => (
@@ -425,10 +425,10 @@ export default function DashboardPage() {
                           {result.improvement_plan.map((tip, i) => {
                             const { h, b } = parse(tip);
                             return (
-                              <div key={i} style={{ display: "flex", gap: "14px", background: "#f5f3ff", borderRadius: "10px", padding: "16px", border: "1px solid #ddd6fe", alignItems: "flex-start" }}>
-                                <div style={{ minWidth: "30px", height: "30px", background: "#7c3aed", color: "white", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: "700", flexShrink: 0 }}>{i + 1}</div>
+                              <div key={i} style={{ display: "flex", gap: "14px", background: "#FFF0F5", borderRadius: "10px", padding: "16px", border: "1px solid #ddd6fe", alignItems: "flex-start" }}>
+                                <div style={{ minWidth: "30px", height: "30px", background: "#DD2476", color: "white", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: "700", flexShrink: 0 }}>{i + 1}</div>
                                 <div style={{ flex: 1 }}>
-                                  {h && <div style={{ fontWeight: "700", color: "#5b21b6", fontSize: "13.5px", marginBottom: "4px" }}>{h}</div>}
+                                  {h && <div style={{ fontWeight: "700", color: "#C70039", fontSize: "13.5px", marginBottom: "4px" }}>{h}</div>}
                                   <div style={{ color: "#6b7280", fontSize: "13px", lineHeight: "1.65" }}>{b}</div>
                                 </div>
                               </div>
@@ -460,7 +460,7 @@ export default function DashboardPage() {
               Your resume has been successfully analyzed. Create an account or log in to save this analysis to your history and unlock unlimited analyses!
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              <button onClick={() => router.push("/register")} style={{ width: "100%", padding: "12px", background: "#1d4ed8", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", transition: "background 0.2s" }}>
+              <button onClick={() => router.push("/register")} style={{ width: "100%", padding: "12px", background: "#DD2476", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", transition: "background 0.2s" }}>
                 Create Free Account
               </button>
               <button onClick={() => router.push("/login")} style={{ width: "100%", padding: "12px", background: "#f1f5f9", color: "#334155", border: "1px solid #e2e8f0", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", transition: "background 0.2s" }}>

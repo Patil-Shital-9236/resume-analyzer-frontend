@@ -27,11 +27,11 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
+    <div style={{ minHeight: "100vh", background: "#FAFAFA", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", padding: "20px" }}>
       <div style={{ width: "100%", maxWidth: "420px" }}>
 
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+          <div style={{ width: "44px", height: "44px", borderRadius: "11px", background: "linear-gradient(135deg,#DD2476,#FF512F)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div style={{ fontSize: "16px", fontWeight: "700", color: "#111827" }}>AI Resume Analyzer</div>
@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
               </div>
 
               <button onClick={handleSubmit} disabled={loading} style={{
-                width: "100%", padding: "11px", background: loading ? "#93c5fd" : "#1d4ed8",
+                width: "100%", padding: "11px", background: loading ? "#93c5fd" : "#DD2476",
                 color: "white", border: "none", borderRadius: "8px", fontWeight: "600",
                 fontSize: "14px", cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit",
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "8px"
@@ -84,17 +84,17 @@ export default function ForgotPasswordPage() {
                 We've sent a password reset link to <strong style={{ color: "#111827" }}>{email}</strong>.<br />
                 The link will expire in <strong>1 hour</strong>.
               </p>
-              <div style={{ background: "#f8fafc", border: "1px solid #e5e7eb", borderRadius: "8px", padding: "12px 16px", fontSize: "12.5px", color: "#6b7280", marginBottom: "20px", textAlign: "left" }}>
+              <div style={{ background: "#FAFAFA", border: "1px solid #e5e7eb", borderRadius: "8px", padding: "12px 16px", fontSize: "12.5px", color: "#6b7280", marginBottom: "20px", textAlign: "left" }}>
                 <strong style={{ color: "#374151" }}>Didn't receive it?</strong><br />
                 Check your spam folder or{" "}
-                <span onClick={() => setSent(false)} style={{ color: "#1d4ed8", cursor: "pointer", fontWeight: "600" }}>try again</span>.
+                <span onClick={() => setSent(false)} style={{ color: "#DD2476", cursor: "pointer", fontWeight: "600" }}>try again</span>.
               </div>
             </div>
           )}
 
           <div style={{ textAlign: "center", marginTop: "20px", paddingTop: "18px", borderTop: "1px solid #f3f4f6" }}>
             <span style={{ fontSize: "13.5px", color: "#6b7280" }}>Remember your password? </span>
-            <span onClick={() => router.push("/login")} style={{ fontSize: "13.5px", color: "#1d4ed8", fontWeight: "600", cursor: "pointer" }}>
+            <span onClick={() => router.push("/login")} style={{ fontSize: "13.5px", color: "#DD2476", fontWeight: "600", cursor: "pointer" }}>
               Back to Login
             </span>
           </div>
