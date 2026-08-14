@@ -44,7 +44,7 @@ export default function MyResumesPage() {
   };
 
   const openResume = (resume) => {
-    if (resume.file_url) {
+    if (resume.file_url && resume.file_url !== "disabled_for_speed") {
       if (resume.file_type === "pdf") {
         setViewingResume({ url: resume.file_url, name: resume.file_name });
       } else {
