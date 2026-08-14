@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -14,76 +13,128 @@ export default function LandingPage() {
   if (!isMounted) return null;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", background: "#0B0F19", fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", color: "#F8FAFC", overflowX: "hidden" }}>
+      <style>{`
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+        }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+          0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+          70% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+        .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        
+        .glass-card {
+          background: rgba(30, 41, 59, 0.4);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .nav-link {
+          color: #94A3B8; transition: color 0.3s; cursor: pointer; font-weight: 500; font-size: 14px;
+        }
+        .nav-link:hover { color: #F8FAFC; }
+      `}</style>
+
       {/* Navbar */}
-      <nav style={{ padding: "20px 40px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "white", borderBottom: "1px solid #e5e7eb" }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, padding: "20px 4vw", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 50, borderBottom: "1px solid rgba(255,255,255,0.05)", backdropFilter: "blur(20px)", background: "rgba(11, 15, 25, 0.8)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }} onClick={() => router.push("/")}>
-          <div style={{ width: "36px", height: "36px", borderRadius: "8px", background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "linear-gradient(135deg, #6366F1, #A855F7)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: "12px", height: "12px", background: "white", borderRadius: "2px", transform: "rotate(45deg)" }} />
           </div>
-          <span style={{ fontSize: "18px", fontWeight: "700", color: "#111827", letterSpacing: "-0.5px" }}>AI Resume Analyzer</span>
+          <span style={{ fontSize: "18px", fontWeight: "700", letterSpacing: "0.5px" }}>Elevate</span>
         </div>
-        <div style={{ display: "flex", gap: "16px" }}>
-          <button onClick={() => router.push("/login")} style={{ padding: "10px 20px", background: "transparent", color: "#475569", border: "none", fontWeight: "600", fontSize: "14.5px", cursor: "pointer", transition: "color 0.2s" }}>
-            Login
-          </button>
-          <button onClick={() => router.push("/register")} style={{ padding: "10px 24px", background: "#111827", color: "white", border: "none", borderRadius: "999px", fontWeight: "600", fontSize: "14.5px", cursor: "pointer", transition: "background 0.2s" }}>
-            Sign Up Free
+        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+          <span className="nav-link" onClick={() => router.push("/login")}>Sign in</span>
+          <button onClick={() => router.push("/register")} style={{ padding: "10px 24px", background: "#F8FAFC", color: "#0B0F19", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", transition: "transform 0.2s" }} onMouseOver={e => e.currentTarget.style.transform = "scale(1.05)"} onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}>
+            Get Started
           </button>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <main style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 20px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        {/* Background Gradients */}
-        <div style={{ position: "absolute", top: "-10%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "800px", background: "radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(248,250,252,0) 70%)", zIndex: 0, pointerEvents: "none" }} />
-        
-        <div style={{ position: "relative", zIndex: 1, maxWidth: "800px" }}>
-          <div style={{ display: "inline-block", padding: "6px 16px", background: "#eff6ff", color: "#1d4ed8", borderRadius: "999px", fontSize: "13px", fontWeight: "700", marginBottom: "24px", border: "1px solid #bfdbfe", textTransform: "uppercase", letterSpacing: "1px" }}>
-            ✨ Smart Career Insights
-          </div>
-          <h1 style={{ fontSize: "56px", fontWeight: "800", color: "#0f172a", lineHeight: "1.1", marginBottom: "24px", letterSpacing: "-1.5px" }}>
-            Get past the ATS. <br />
-            <span style={{ background: "linear-gradient(to right, #2563eb, #7c3aed)", WebkitBackgroundClip: "text", color: "transparent" }}>Land your dream job.</span>
-          </h1>
-          <p style={{ fontSize: "18px", color: "#475569", lineHeight: "1.6", marginBottom: "40px", maxWidth: "600px", margin: "0 auto 40px" }}>
-            Instantly analyze your resume against any job description using advanced AI. Discover missing skills, fix weaknesses, and get a tailored improvement plan.
-          </p>
-          
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px" }}>
-            <button onClick={() => router.push("/dashboard")} style={{ padding: "16px 32px", background: "#2563eb", color: "white", border: "none", borderRadius: "999px", fontWeight: "600", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 10px 25px -5px rgba(37,99,235,0.3), 0 8px 10px -6px rgba(37,99,235,0.1)", transition: "transform 0.2s, box-shadow 0.2s" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-              Analyze Resume Free
-            </button>
-            <button onClick={() => router.push("/login")} style={{ padding: "16px 32px", background: "white", color: "#334155", border: "1px solid #cbd5e1", borderRadius: "999px", fontWeight: "600", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 1px 3px rgba(0,0,0,0.05)", transition: "background 0.2s" }}>
-              Log In
-            </button>
-          </div>
-          <div style={{ marginTop: "24px", fontSize: "13px", color: "#64748b", fontWeight: "500" }}>
-            No credit card required • 1 Free Analysis • Instant Results
-          </div>
-        </div>
+      <main style={{ paddingTop: "140px", minHeight: "100vh", display: "flex", alignItems: "center", position: "relative" }}>
+        {/* Glow Effects */}
+        <div style={{ position: "absolute", top: "20%", left: "-10%", width: "600px", height: "600px", background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(11,15,25,0) 70%)", zIndex: 0 }} />
+        <div style={{ position: "absolute", bottom: "-10%", right: "-10%", width: "800px", height: "800px", background: "radial-gradient(circle, rgba(168,85,247,0.1) 0%, rgba(11,15,25,0) 70%)", zIndex: 0 }} />
 
-        {/* Feature Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", marginTop: "80px", maxWidth: "1000px", width: "100%", position: "relative", zIndex: 1 }}>
-          {[
-            { icon: "🎯", title: "Match Scoring", desc: "Get an instant ATS match percentage based on skills and experience." },
-            { icon: "💡", title: "Missing Skills", desc: "Identify exactly which keywords you need to add to pass the filter." },
-            { icon: "📈", title: "Action Plan", desc: "Receive a step-by-step guide to improve your resume instantly." }
-          ].map((f, i) => (
-            <div key={i} style={{ background: "white", padding: "32px", borderRadius: "16px", border: "1px solid #e2e8f0", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.05)", textAlign: "left" }}>
-              <div style={{ fontSize: "32px", marginBottom: "16px" }}>{f.icon}</div>
-              <h3 style={{ fontSize: "18px", fontWeight: "700", color: "#0f172a", margin: "0 0 8px" }}>{f.title}</h3>
-              <p style={{ fontSize: "14px", color: "#64748b", lineHeight: "1.6", margin: 0 }}>{f.desc}</p>
+        <div style={{ width: "100%", maxWidth: "1300px", margin: "0 auto", padding: "0 4vw", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", zIndex: 1, alignItems: "center" }}>
+          
+          {/* Left Content */}
+          <div style={{ paddingRight: "40px" }}>
+            <div className="animate-fade-up" style={{ display: "inline-block", padding: "6px 14px", background: "rgba(99, 102, 241, 0.1)", color: "#818CF8", borderRadius: "100px", fontSize: "13px", fontWeight: "600", marginBottom: "32px", border: "1px solid rgba(99, 102, 241, 0.2)", letterSpacing: "0.5px" }}>
+              Precision Application Scanning
             </div>
-          ))}
+            
+            <h1 className="animate-fade-up delay-1" style={{ fontSize: "64px", fontWeight: "700", lineHeight: "1.05", marginBottom: "32px", letterSpacing: "-1.5px" }}>
+              Engineered to bypass the <span style={{ color: "#818CF8" }}>algorithm.</span>
+            </h1>
+            
+            <p className="animate-fade-up delay-2" style={{ fontSize: "19px", color: "#94A3B8", lineHeight: "1.6", marginBottom: "48px", fontWeight: "400" }}>
+              Stop guessing what recruiters want. We map your resume's DNA against any job description, surfacing the exact keywords, structural gaps, and metrics you need to secure the interview.
+            </p>
+            
+            <div className="animate-fade-up delay-3" style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+              <button onClick={() => router.push("/dashboard")} style={{ padding: "18px 36px", background: "linear-gradient(135deg, #6366F1, #4F46E5)", color: "white", border: "none", borderRadius: "12px", fontWeight: "600", fontSize: "16px", cursor: "pointer", transition: "transform 0.2s", animation: "pulseGlow 2s infinite" }} onMouseOver={e => e.currentTarget.style.transform = "translateY(-2px)"} onMouseOut={e => e.currentTarget.style.transform = "translateY(0)"}>
+                Analyze First Resume
+              </button>
+              <div style={{ fontSize: "14px", color: "#64748B", lineHeight: "1.5" }}>
+                No registration required.<br/>Results in 2.4 seconds.
+              </div>
+            </div>
+          </div>
+
+          {/* Right Visual */}
+          <div className="animate-fade-up delay-2" style={{ position: "relative", height: "600px" }}>
+            <div style={{ animation: "float 6s ease-in-out infinite", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "100%" }}>
+              
+              {/* Dashboard Mockup Component */}
+              <div className="glass-card" style={{ padding: "24px", borderRadius: "24px", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "32px", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "16px" }}>
+                  <div>
+                    <div style={{ fontSize: "12px", color: "#64748B", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "4px" }}>Match Probability</div>
+                    <div style={{ fontSize: "36px", fontWeight: "700", color: "#10B981" }}>87%</div>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <div style={{ fontSize: "12px", color: "#64748B", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "4px" }}>Role</div>
+                    <div style={{ fontSize: "16px", fontWeight: "600", color: "#E2E8F0" }}>Senior Engineer</div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <div style={{ padding: "16px", background: "rgba(16, 185, 129, 0.05)", borderRadius: "12px", borderLeft: "3px solid #10B981" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#E2E8F0", marginBottom: "4px" }}>System Architecture</div>
+                    <div style={{ fontSize: "13px", color: "#94A3B8" }}>Present in both resume and job description.</div>
+                  </div>
+                  <div style={{ padding: "16px", background: "rgba(239, 68, 68, 0.05)", borderRadius: "12px", borderLeft: "3px solid #EF4444" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#E2E8F0", marginBottom: "4px" }}>Microservices</div>
+                    <div style={{ fontSize: "13px", color: "#94A3B8" }}>Missing. Critical requirement found in JD 4 times.</div>
+                  </div>
+                  <div style={{ padding: "16px", background: "rgba(245, 158, 11, 0.05)", borderRadius: "12px", borderLeft: "3px solid #F59E0B" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#E2E8F0", marginBottom: "4px" }}>Impact Metrics</div>
+                    <div style={{ fontSize: "13px", color: "#94A3B8" }}>Weak phrasing. Quantify "improved performance".</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </main>
 
-      {/* Footer */}
-      <footer style={{ borderTop: "1px solid #e5e7eb", padding: "32px 40px", background: "white", textAlign: "center" }}>
-        <p style={{ margin: 0, fontSize: "14px", color: "#94a3b8", fontWeight: "500" }}>© 2025 AI Resume Analyzer. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
