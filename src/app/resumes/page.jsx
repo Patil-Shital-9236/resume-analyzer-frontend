@@ -44,6 +44,11 @@ export default function MyResumesPage() {
   };
 
   const openResume = (resume) => {
+    if (resume.file_url === "processing") {
+      alert("Your resume is currently being processed and saved to the database. Please try viewing it again in a few seconds.");
+      return;
+    }
+    
     if (resume.file_url && resume.file_url !== "disabled_for_speed") {
       if (resume.file_type === "pdf") {
         setViewingResume({ url: resume.file_url, name: resume.file_name });
@@ -51,7 +56,7 @@ export default function MyResumesPage() {
         window.open(resume.file_url, "_blank");
       }
     } else {
-      alert("Please re-upload this resume to enable viewing.");
+      alert("This older resume was uploaded without file storage enabled. Please re-upload it to view.");
     }
   };
 
