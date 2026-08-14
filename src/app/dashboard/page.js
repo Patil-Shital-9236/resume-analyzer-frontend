@@ -20,6 +20,7 @@ export default function DashboardPage() {
   const [uploadMsg, setUploadMsg] = useState("");
   const [analyzeError, setAnalyzeError] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
+  const [showGuestPopup, setShowGuestPopup] = useState(false);
 
   useEffect(() => {
     const name = localStorage.getItem("userName");
@@ -76,6 +77,7 @@ export default function DashboardPage() {
         if (!userId) {
           localStorage.setItem("guestAnalysisCount", "1");
           localStorage.setItem("guestResumeId", uploadedResumeId);
+          setTimeout(() => setShowGuestPopup(true), 1500); // Wait 1.5s then show popup
         }
       }
       else setAnalyzeError(res.error || "Analysis failed");
@@ -444,7 +446,36 @@ export default function DashboardPage() {
           )}
         </div>
       </div>
-      <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
+      {/* Guest Mode Popup Modal */}
+      {showGuestPopup && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}>
+          <div style={{ background: "white", borderRadius: "16px", padding: "32px", maxWidth: "400px", width: "90%", textAlign: "center", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)", animation: "popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}>
+            <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "#ecfdf5", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#111827", margin: "0 0 12px" }}>Analysis Complete!</h2>
+            <p style={{ color: "#4b5563", fontSize: "14px", lineHeight: "1.6", marginBottom: "24px" }}>
+              Your resume has been successfully analyzed. Create an account or log in to save this analysis to your history and unlock unlimited analyses!
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <button onClick={() => router.push("/register")} style={{ width: "100%", padding: "12px", background: "#1d4ed8", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", transition: "background 0.2s" }}>
+                Create Free Account
+              </button>
+              <button onClick={() => router.push("/login")} style={{ width: "100%", padding: "12px", background: "#f1f5f9", color: "#334155", border: "1px solid #e2e8f0", borderRadius: "8px", fontWeight: "600", fontSize: "14px", cursor: "pointer", transition: "background 0.2s" }}>
+                Login to Existing Account
+              </button>
+              <button onClick={() => setShowGuestPopup(false)} style={{ width: "100%", padding: "12px", background: "transparent", color: "#94a3b8", border: "none", borderRadius: "8px", fontWeight: "500", fontSize: "13px", cursor: "pointer", marginTop: "4px" }}>
+                View Results First
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        @keyframes popIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+      `}</style>
     </div>
   );
 }

@@ -55,7 +55,13 @@ export default function Sidebar({ active }) {
           return (
             <div
               key={item.id}
-              onClick={() => router.push(item.path)}
+              onClick={() => {
+                if (item.id !== "dashboard" && !localStorage.getItem("userId")) {
+                  router.push("/login");
+                } else {
+                  router.push(item.path);
+                }
+              }}
               style={{
                 display: "flex", alignItems: "center", gap: "11px",
                 padding: "9px 12px", borderRadius: "8px",
