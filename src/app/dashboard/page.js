@@ -54,7 +54,9 @@ export default function DashboardPage() {
       const res = await uploadResume(formData);
       if (res.resumeId) { setUploadedResumeId(res.resumeId); setUploadMsg("success:Resume uploaded!"); }
       else { setUploadMsg("error:" + (res.error || "Upload failed")); }
-    } catch { setUploadMsg("error:Server error"); }
+    } catch (err) {
+      setUploadMsg("error:" + (err.message || "Server error"));
+    }
     setUploading(false);
   };
 
