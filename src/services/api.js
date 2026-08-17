@@ -1,4 +1,7 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 
+  (process.env.NODE_ENV === 'production' 
+    ? "https://resume-analyzer-backend-uk1x.onrender.com" 
+    : "http://localhost:5000");
 
 export default API_BASE;
 
