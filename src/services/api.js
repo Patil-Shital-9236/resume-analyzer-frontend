@@ -1,8 +1,15 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 
-  (process.env.NODE_ENV === 'production' 
-    ? "https://resume-analyzer-backend-uk1x.onrender.com" 
-    : "http://localhost:5000");
+export const getApiBase = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (envUrl && !envUrl.includes("loca.lt")) {
+    return envUrl;
+  }
+  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    return "https://resume-analyzer-backend-uk1x.onrender.com";
+  }
+  return envUrl || (process.env.NODE_ENV === "production" ? "https://resume-analyzer-backend-uk1x.onrender.com" : "http://localhost:5000");
+};
 
+const API_BASE = getApiBase();
 export default API_BASE;
 
 /* -------------------------

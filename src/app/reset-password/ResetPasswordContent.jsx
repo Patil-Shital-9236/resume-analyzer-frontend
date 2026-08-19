@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { getApiBase } from "@/services/api";
 
 export default function ResetPasswordContent() {
   const router = useRouter();
@@ -19,7 +21,7 @@ export default function ResetPasswordContent() {
 
   useEffect(() => {
     if (!token) { setVerifying(false); setTokenValid(false); return; }
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     fetch(`${apiBase}/api/auth/verify-reset-token?token=${token}`)
       .then(r => r.json())
       .then(data => { setTokenValid(data.valid); setVerifying(false); })
@@ -41,7 +43,7 @@ export default function ResetPasswordContent() {
     const e = validate();
     if (Object.keys(e).length > 0) { setErrors(e); return; }
     setLoading(true); setErrors({});
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     try {
       const res = await fetch(`${apiBase}/api/auth/reset-password`, {
         method: "POST",

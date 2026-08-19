@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 
+import { getApiBase } from "@/services/api";
+
 export default function MyResumesPage() {
   const router = useRouter();
   const [resumes, setResumes] = useState([]);
@@ -13,7 +15,7 @@ export default function MyResumesPage() {
   const fetchResumes = () => {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     fetch(`${apiBase}/api/user/resumes/${userId}`)
       .then(r => r.json())
       .then(data => { setResumes(data.resumes || []); setLoading(false); })
@@ -24,7 +26,7 @@ export default function MyResumesPage() {
 
   const setLatest = async (resumeId) => {
     const userId = localStorage.getItem("userId");
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     await fetch(`${apiBase}/api/user/resumes/${resumeId}/set-latest`, {
       method: "PUT", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId })
@@ -36,7 +38,7 @@ export default function MyResumesPage() {
 
   const deleteResume = async (resumeId) => {
     if (!confirm("Delete this resume?")) return;
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     await fetch(`${apiBase}/api/user/resumes/${resumeId}`, { method: "DELETE" });
     setMsg("🗑️ Resume deleted");
     fetchResumes();
@@ -50,10 +52,26 @@ export default function MyResumesPage() {
     }
     
     if (resume.file_url && resume.file_url !== "disabled_for_speed") {
+      let targetUrl = resume.file_url;
+      if (targetUrl.startsWith("data:")) {
+        try {
+          const parts = targetUrl.split(",");
+          const mime = parts[0].match(/:(.*?);/)[1];
+          const bstr = atob(parts[1]);
+          let n = bstr.length;
+          const u8arr = new Uint8Array(n);
+          while (n--) { u8arr[n] = bstr.charCodeAt(n); }
+          const blob = new Blob([u8arr], { type: mime });
+          targetUrl = URL.createObjectURL(blob);
+        } catch (e) {
+          console.error("Blob conversion error:", e);
+        }
+      }
+
       if (resume.file_type === "pdf") {
-        setViewingResume({ url: resume.file_url, name: resume.file_name });
+        setViewingResume({ url: targetUrl, name: resume.file_name });
       } else {
-        window.open(resume.file_url, "_blank");
+        window.open(targetUrl, "_blank");
       }
     } else {
       alert("This older resume was uploaded without file storage enabled. Please re-upload it to view.");

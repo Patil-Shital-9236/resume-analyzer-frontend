@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
+import { getApiBase } from "@/services/api";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function ProfilePage() {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
 
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     Promise.all([
       fetch(`${apiBase}/api/user/profile/${userId}`).then(r => r.json()),
       fetch(`${apiBase}/api/user/history/${userId}`).then(r => r.json()).catch(() => ({ history: [] })),
@@ -36,7 +37,7 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     const userId = localStorage.getItem("userId");
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     setSaving(true); setSaveMsg("");
     try {
       const res = await fetch(`${apiBase}/api/user/profile/${userId}`, {

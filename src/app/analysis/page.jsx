@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
+import { getApiBase } from "@/services/api";
 
 export default function JobAnalysisPage() {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function JobAnalysisPage() {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (!userId) { router.push("/login"); return; }
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const apiBase = getApiBase();
     fetch(`${apiBase}/api/user/job-descriptions/${userId}`)
       .then(r => r.json())
       .then(data => { setJds(data.jobDescriptions || []); setLoading(false); })
