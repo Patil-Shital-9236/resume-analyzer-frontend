@@ -1,22 +1,23 @@
 export const getApiBase = () => {
+  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    return "https://resume-analyzer-backend-uk1x.onrender.com";
+  }
   const envUrl = process.env.NEXT_PUBLIC_API_URL;
   if (envUrl && !envUrl.includes("loca.lt")) {
     return envUrl;
   }
-  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
-    return "https://resume-analyzer-backend-uk1x.onrender.com";
-  }
-  return envUrl || (process.env.NODE_ENV === "production" ? "https://resume-analyzer-backend-uk1x.onrender.com" : "http://localhost:5000");
+  return process.env.NODE_ENV === "production" ? "https://resume-analyzer-backend-uk1x.onrender.com" : "http://localhost:5000";
 };
 
-const API_BASE = getApiBase();
+const API_BASE = "https://resume-analyzer-backend-uk1x.onrender.com";
 export default API_BASE;
 
 /* -------------------------
    AUTH
 -------------------------- */
 export const registerUser = async (data) => {
-  const res = await fetch(`${API_BASE}/api/auth/register`, {
+  const apiBase = getApiBase();
+  const res = await fetch(`${apiBase}/api/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -32,7 +33,8 @@ export const registerUser = async (data) => {
 };
 
 export const loginUser = async (data) => {
-  const res = await fetch(`${API_BASE}/api/auth/login`, {
+  const apiBase = getApiBase();
+  const res = await fetch(`${apiBase}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -64,8 +66,9 @@ export const uploadResume = async (fileOrFormData, userId) => {
     bodyData.append("userId", userId || "");
   }
 
+  const apiBase = getApiBase();
   try {
-    const res = await fetch(`${API_BASE}/api/resume/upload`, {
+    const res = await fetch(`${apiBase}/api/resume/upload`, {
       method: "POST",
       body: bodyData,
     });
@@ -89,7 +92,8 @@ export const uploadResume = async (fileOrFormData, userId) => {
    FULL ANALYSIS
 -------------------------- */
 export const runFullAnalysis = async (data) => {
-  const res = await fetch(`${API_BASE}/api/full-analysis`, {
+  const apiBase = getApiBase();
+  const res = await fetch(`${apiBase}/api/full-analysis`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
