@@ -67,13 +67,26 @@ export const loginUser = async (data) => {
 /* -------------------------
    RESUME UPLOAD (FINAL FIX)
 -------------------------- */
-export const uploadResume = async (fileOrFormData, userId) => {
+export const uploadResume = async (fileOrFormData, userId, preParsedContent = null) => {
   if (!fileOrFormData) {
     throw new Error("No file selected");
   }
 
   let bodyData;
-  if (typeof FormData !== "undefined" && fileOrFormData instanceof FormData) {
+  let headers = {};
+
+  // FAST PATH: Client extracted text directly in browser (payload is ~2KB, instant)
+  if (preParsedContent && typeof preParsedContent === "string" && preParsedContent.trim().length > 30) {
+    const fileName = fileOrFormData.name || "resume.pdf";
+    const fileType = fileName.endsWith(".docx") ? "docx" : "pdf";
+    bodyData = JSON.stringify({
+      userId: userId || "",
+      fileName,
+      fileType,
+      parsedContent: preParsedContent,
+    });
+    headers = { "Content-Type": "application/json" };
+  } else if (typeof FormData !== "undefined" && fileOrFormData instanceof FormData) {
     bodyData = fileOrFormData;
   } else {
     bodyData = new FormData();
@@ -85,6 +98,7 @@ export const uploadResume = async (fileOrFormData, userId) => {
   try {
     const res = await fetch(`${apiBase}/api/resume/upload`, {
       method: "POST",
+      headers,
       body: bodyData,
     });
 

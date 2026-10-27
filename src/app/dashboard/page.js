@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { uploadResume, runFullAnalysis, warmupBackend } from "@/services/api";
+import { extractPdfText } from "@/services/pdfExtractor";
 import Sidebar from "@/components/Sidebar";
 
 export default function DashboardPage() {
@@ -53,6 +54,17 @@ export default function DashboardPage() {
 
     setUploading(true);
     setUploadMsg("");
+    setUploadStatusText("Processing resume...");
+
+    let parsedText = null;
+    if (fileToUpload.type === "application/pdf" || fileToUpload.name.endsWith(".pdf")) {
+      try {
+        parsedText = await extractPdfText(fileToUpload);
+      } catch (extractErr) {
+        console.warn("Client-side extraction fallback:", extractErr);
+      }
+    }
+
     setUploadStatusText("Uploading resume...");
 
     const timer1 = setTimeout(() => {
@@ -64,15 +76,23 @@ export default function DashboardPage() {
     }, 6000);
 
     try {
-      const formData = new FormData();
-      formData.append("resume", fileToUpload);
-      formData.append("userId", userId || "null");
-      const res = await uploadResume(formData);
-      if (res.resumeId) {
+      let res;
+      if (parsedText && parsedText.length > 30) {
+        // FAST PATH: Upload 2KB pre-parsed text payload (instant over any connection)
+        res = await uploadResume(fileToUpload, userId || "null", parsedText);
+      } else {
+        // FALLBACK: Standard binary file upload
+        const formData = new FormData();
+        formData.append("resume", fileToUpload);
+        formData.append("userId", userId || "null");
+        res = await uploadResume(formData);
+      }
+
+      if (res && res.resumeId) {
         setUploadedResumeId(res.resumeId);
         setUploadMsg("success:Resume uploaded successfully!");
       } else {
-        setUploadMsg("error:" + (res.error || "Upload failed"));
+        setUploadMsg("error:" + (res?.error || "Upload failed"));
       }
     } catch (err) {
       setUploadMsg("error:" + (err.message || "Server error"));
