@@ -13,6 +13,21 @@ const API_BASE = "https://resume-analyzer-backend-uk1x.onrender.com";
 export default API_BASE;
 
 /* -------------------------
+   SILENT SERVER WARM-UP (PREVENT RENDER COLD STARTS)
+-------------------------- */
+let isWarmedUp = false;
+export const warmupBackend = () => {
+  if (isWarmedUp || typeof window === "undefined") return;
+  isWarmedUp = true;
+  try {
+    const apiBase = getApiBase();
+    fetch(`${apiBase}/api/health`, { method: "GET", keepalive: true }).catch(() => {});
+  } catch {
+    // silent fallback
+  }
+};
+
+/* -------------------------
    AUTH
 -------------------------- */
 export const registerUser = async (data) => {

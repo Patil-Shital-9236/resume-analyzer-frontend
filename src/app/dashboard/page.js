@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { uploadResume, runFullAnalysis } from "@/services/api";
+import { uploadResume, runFullAnalysis, warmupBackend } from "@/services/api";
 import Sidebar from "@/components/Sidebar";
 
 export default function DashboardPage() {
@@ -13,6 +13,7 @@ export default function DashboardPage() {
   const [company, setCompany] = useState("");
   const [jobDesc, setJobDesc] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [uploadStatusText, setUploadStatusText] = useState("Uploading...");
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState(null);
   const [uploadedResumeId, setUploadedResumeId] = useState(null);
@@ -23,6 +24,9 @@ export default function DashboardPage() {
   const [showGuestPopup, setShowGuestPopup] = useState(false);
 
   useEffect(() => {
+    // Silently pre-warm Render cloud backend immediately on page open
+    warmupBackend();
+
     const name = localStorage.getItem("userName");
     const uid = localStorage.getItem("userId");
     
@@ -36,8 +40,9 @@ export default function DashboardPage() {
     }
   }, []);
 
-  const handleUpload = async () => {
-    if (!file) { setUploadMsg("error:Please select a file"); return; }
+  const handleUpload = async (targetFile) => {
+    const fileToUpload = targetFile && targetFile.name ? targetFile : file;
+    if (!fileToUpload) { setUploadMsg("error:Please select a file"); return; }
     
     const guestCount = parseInt(localStorage.getItem("guestAnalysisCount") || "0");
     if (!userId && guestCount >= 1) {
@@ -46,18 +51,44 @@ export default function DashboardPage() {
       return;
     }
 
-    setUploading(true); setUploadMsg("");
+    setUploading(true);
+    setUploadMsg("");
+    setUploadStatusText("Uploading resume...");
+
+    const timer1 = setTimeout(() => {
+      setUploadStatusText("Connecting to server...");
+    }, 2500);
+
+    const timer2 = setTimeout(() => {
+      setUploadStatusText("Waking up server (Render free tier, almost ready)...");
+    }, 6000);
+
     try {
       const formData = new FormData();
-      formData.append("resume", file);
+      formData.append("resume", fileToUpload);
       formData.append("userId", userId || "null");
       const res = await uploadResume(formData);
-      if (res.resumeId) { setUploadedResumeId(res.resumeId); setUploadMsg("success:Resume uploaded!"); }
-      else { setUploadMsg("error:" + (res.error || "Upload failed")); }
+      if (res.resumeId) {
+        setUploadedResumeId(res.resumeId);
+        setUploadMsg("success:Resume uploaded successfully!");
+      } else {
+        setUploadMsg("error:" + (res.error || "Upload failed"));
+      }
     } catch (err) {
       setUploadMsg("error:" + (err.message || "Server error"));
+    } finally {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      setUploading(false);
+      setUploadStatusText("Uploading...");
     }
-    setUploading(false);
+  };
+
+  const onFileChange = (selected) => {
+    if (!selected) return;
+    setFile(selected);
+    setUploadMsg("");
+    handleUpload(selected);
   };
 
   const handleAnalyze = async () => {
@@ -186,7 +217,7 @@ export default function DashboardPage() {
                 )}
               </div>
               <div onDragOver={e => { e.preventDefault(); setDragOver(true); }} onDragLeave={() => setDragOver(false)}
-                onDrop={e => { e.preventDefault(); setDragOver(false); setFile(e.dataTransfer.files[0]); setUploadMsg(""); }}
+                onDrop={e => { e.preventDefault(); setDragOver(false); if (e.dataTransfer.files?.[0]) onFileChange(e.dataTransfer.files[0]); }}
                 onClick={() => document.getElementById("fileInput").click()}
                 style={{ border: `2px dashed ${ dragOver ? "#DD2476" : file ? "#DD2476" : "#e5e7eb"}`, borderRadius: "10px", padding: "30px 16px", textAlign: "center", cursor: "pointer", marginBottom: "14px", background: dragOver ? "#FFF0F5" : file ? "#FFF0F5" : "#fafafa", transition: "all 0.2s" }}>
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }}>
@@ -195,8 +226,8 @@ export default function DashboardPage() {
                     : <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>}
                 </div>
                 {file ? <div style={{ fontSize: "13px", fontWeight: "600", color: "#059669" }}>{file.name}</div>
-                  : <><div style={{ fontSize: "13px", color: "#374151", fontWeight: "500" }}>Click or drag file here</div><div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "3px" }}>Supports PDF, DOCX</div></>}
-                <input id="fileInput" type="file" accept=".pdf,.docx" style={{ display: "none" }} onChange={e => { setFile(e.target.files[0]); setUploadMsg(""); }} />
+                  : <><div style={{ fontSize: "13px", color: "#374151", fontWeight: "500" }}>Click or drag file here</div><div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "3px" }}>Supports PDF, DOCX (auto-uploads on selection)</div></>}
+                <input id="fileInput" type="file" accept=".pdf,.docx" style={{ display: "none" }} onChange={e => { if (e.target.files?.[0]) onFileChange(e.target.files[0]); }} />
               </div>
               {uploadMsg && (
                 <div style={{ padding: "9px 12px", borderRadius: "7px", fontSize: "12.5px", marginBottom: "12px", display: "flex", gap: "8px", alignItems: "center", background: isSuccess ? "#f0fdf4" : "#fef2f2", color: isSuccess ? "#059669" : "#dc2626", border: `1px solid ${isSuccess ? "#a7f3d0" : "#fecaca"}` }}>
@@ -206,9 +237,15 @@ export default function DashboardPage() {
                   {uploadText}
                 </div>
               )}
-              <button onClick={handleUpload} disabled={uploading || !file} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "none", background: file && !uploading ? "#DD2476" : "#e5e7eb", color: file && !uploading ? "white" : "#9ca3af", fontWeight: "600", fontSize: "13.5px", cursor: file && !uploading ? "pointer" : "not-allowed", fontFamily: "inherit", transition: "all 0.2s" }}>
-                {uploading ? "Uploading..." : "Upload Resume"}
+              <button onClick={() => handleUpload()} disabled={uploading || !file} style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "none", background: file && !uploading ? "#DD2476" : uploading ? "#f472b6" : "#e5e7eb", color: file || uploading ? "white" : "#9ca3af", fontWeight: "600", fontSize: "13.5px", cursor: file && !uploading ? "pointer" : "not-allowed", fontFamily: "inherit", transition: "all 0.2s", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                {uploading ? (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 0.8s linear infinite" }}><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+                    <span>{uploadStatusText}</span>
+                  </>
+                ) : uploadedResumeId ? "Replace / Re-upload Resume" : "Upload Resume"}
               </button>
+
             </div>
 
             {/* JD Card */}
